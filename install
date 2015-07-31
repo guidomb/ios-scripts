@@ -37,7 +37,7 @@ generate_env_file ()
       read xcode_workspace_file
       if [ -z "$xcode_workspace_file" ]
       then
-        xcode_project_file="$project_name.xcworkspace"
+        xcode_workspace_file="$project_name.xcworkspace"
       fi
     else
       echo ""
