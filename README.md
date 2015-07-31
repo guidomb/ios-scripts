@@ -12,7 +12,7 @@ cd ios-scripts
 ./install PATH_TO_IOS_PROJECT_FOLDER
 ```
 
-The first time you run this script you would probably want to generate .env file thats is needed for the scripts
+The first time you run this script you would probably want to generate .env file that is needed for the scripts
 to work.
 
 ## Usage
