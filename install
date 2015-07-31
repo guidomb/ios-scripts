@@ -75,7 +75,7 @@ echo ""
 
 if [ ! -f "$1/script/.env" ]
 then
-  generate_env_file
+  generate_env_file $1
 fi
 
 if [ -f $1/Cartfile ]
