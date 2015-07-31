@@ -2,6 +2,10 @@
 
 A set of scripts to manage iOS projects. This scripts are inspired by [this](http://githubengineering.com/scripts-to-rule-them-all/) GitHub engineering blog post and [this](https://github.com/jspahrsummers/objc-build-scripts) repository from [jspahrsummers](https://github.com/jspahrsummers).
 
+This scripts assume that you are using `xcodebuild` to build the project.
+
+**NOTE**: Because of [this](https://github.com/Carthage/Carthage/pull/605) issue in Carthage that hasn't been merged yet we need to use a custom build of Carthage. Also because of [this](https://github.com/Carthage/Carthage/pull/583) issue you need to add your `.p12` to be able to sign the `.framework`.
+
 ## Installation
 
 To install the scripts into any iOS project you just need to run the install script (no pound intended :wink:)
