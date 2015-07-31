@@ -1,6 +1,6 @@
 # iOS Scripts
 
-A set of scripts to manage iOS projects.
+A set of scripts to manage iOS projects. This scripts are inspired by [this](http://githubengineering.com/scripts-to-rule-them-all/) GitHub engineering blog post and [this](https://github.com/jspahrsummers/objc-build-scripts) repository from [jspahrsummers](https://github.com/jspahrsummers).
 
 ## Installation
 
@@ -17,17 +17,35 @@ to work.
 
 ## Usage
 
+After installing the scripts in your iOS project you should find a `script` folder with the following scripts
+
 ### script/bootstrap
+
+The bootstrap script should be run every time the project is cloned. This scripts checks and installs all the required dependencies required for your project.
+
+By default this script install the basic dependencies for any iOS project to work. It is smart enough the check if you are using Cocoapods or Carthage as the dependency manager.
+
+In case you need to install more dependencies or execute some configuration script, the appropiate way to do this is by adding a bootstrap hook. If you create an executable script in `script/script_hooks/bootstrap` that script will be called during the bootstrap process.
 
 ### script/build
 
+The build script just builds the project
+
 ### script/test
+
+The test script builds and run the tests. If the project has a `.podspec` file is runs the cocoapod linter.
 
 ### script/coverage
 
+Generates code coverage data and upload it to [Coveralls](http://coveralls.io). This script is intended to be used in CI.
+
 ### script/update
 
+Updates the project's dependencies using the underlaying dependency management machinery.
+
 ### script/cibuild
+
+This script must be run in the CI environment. It bootstraps the project, builds it and run the test.
 
 ## License
 
