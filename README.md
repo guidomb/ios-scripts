@@ -4,7 +4,7 @@ A set of scripts to manage iOS projects. This scripts are inspired by [this](htt
 
 This scripts assume that you are using `xcodebuild` to build the project.
 
-**NOTE**: Because of [this](https://github.com/Carthage/Carthage/pull/605) issue in Carthage that hasn't been merged yet we need to use a custom build of Carthage. Also because of [this](https://github.com/Carthage/Carthage/pull/583) issue you need to add your `.p12` to be able to sign the `.framework`.
+**NOTE**: Because of [this](https://github.com/Carthage/Carthage/pull/605) issue in Carthage that hasn't been merged yet we need to use a custom build of Carthage. Also because of [this](https://github.com/Carthage/Carthage/pull/583) issue you need to add your `.p12` in `script/certificates` in your project to be able to sign the `.framework`.
 
 ## Installation
 
