@@ -35,7 +35,7 @@ main ()
       echo "####### Build & Test Phase #######"
       echo ""
       script/test
-      status=$?
+      status=$? # TODO This is not working!!!!
     fi
 
     delete_keychain
