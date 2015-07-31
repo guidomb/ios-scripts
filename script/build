@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -e
+
+if [ -f Cartfile ] && type carthage > /dev/null
+then
+  carthage build --no-skip-current --platform ios
+else
+  source script/.env
+
+  build_command="set -o pipefail && xcodebuild -scheme $XCODE_SCHEME -project $XCODE_PROJECT -sdk iphonesimulator build -configuration Debug"
+  if type bundle > /dev/null && bundle show xcpretty > /dev/null
+  then
+    build_command="$build_command | xcpretty -c"
+  fi
+fi

@@ -1,0 +1,50 @@
+#!/bin/bash
+#
+# $1 - Path to iOS project
+
+set -e
+
+echo ""
+echo " → Installing scripts into '$1/script'"
+cp -r script $1
+
+echo ""
+echo "Do you want to generate .env file? [N/y]"
+read generate_env_file
+
+if [ "$generate_env_file" == "y" ]
+then
+  while [ -z "$project_name" ]
+  do
+    echo ""
+    echo "Enter the project name:"
+    read project_name
+  done
+
+  echo ""
+  echo "Enter the xcode scheme [$project_name]:"
+  read xcode_project_scheme
+  echo ""
+  echo "Enter the xcode project file name [$project_name.xcodeproj]:"
+  read xcode_project_file
+
+  if [ -z "$xcode_project_scheme" ]
+  then
+    xcode_project_scheme=$project_name
+  fi
+  if [ -z "$xcode_project_file" ]
+  then
+    xcode_project_file="$project_name.xcodeproj"
+  fi
+
+  echo "
+PROJECT_NAME=$project_name
+XCODE_SCHEME=$xcode_project_scheme
+XCODE_PROJECT=$xcode_project_file" > "$1/script/.env"
+
+  echo " → '$1/script/.env' successfully generated"
+  echo ""
+else
+  echo " → Skipping generation of .env file"
+  echo ""
+fi
