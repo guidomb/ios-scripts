@@ -7,6 +7,14 @@ set -e
 echo ""
 echo " → Installing scripts into '$1/script'"
 cp -r script $1
+echo ""
+echo "    ✔  Scripts successfully installed"
+echo ""
+
+if [ -f "$1/script/.env" ]
+then
+  exit 0
+fi
 
 echo ""
 echo "Do you want to generate .env file? [N/y]"
