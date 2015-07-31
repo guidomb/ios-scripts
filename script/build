@@ -8,9 +8,20 @@ then
 else
   source script/.env
 
-  build_command="set -o pipefail && xcodebuild -scheme $XCODE_SCHEME -project $XCODE_PROJECT -sdk iphonesimulator build -configuration Debug"
+  build_command="set -o pipefail && xcodebuild -scheme $XCODE_SCHEME"
+  if [ -z "$XCODE_WORKSPACE" ]
+  then
+    build_command="$build_command -project $XCODE_PROJECT"
+  else
+    build_command="$build_command -workspace $XCODE_WORKSPACE"
+  fi
+  build_command="$build_command -sdk iphonesimulator build -configuration Debug"
+
   if type bundle > /dev/null && bundle show xcpretty > /dev/null
   then
     build_command="$build_command | xcpretty -c"
   fi
+
+  eval $build_command
+
 fi
