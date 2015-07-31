@@ -151,7 +151,7 @@ install_carthage ()
   else
     echo ""
     echo " → Installing custom version of Carthage"
-    curl -o script/Carthage.pkg https://raw.githubusercontent.com/guidomb/ios-scripts/master/artifacts/Carthage.pkg
+    curl -s -o script/Carthage.pkg https://raw.githubusercontent.com/guidomb/ios-scripts/master/artifacts/Carthage.pkg
     sudo installer -pkg script/Carthage.pkg -target / > /dev/null
     echo "    ✔ Custom Carthage installed"
   fi
