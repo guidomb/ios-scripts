@@ -60,6 +60,13 @@ XCODE_PROJECT=$xcode_project_file" > "$1/script/.env"
     echo ""
     cat "$1/script/.env"
     echo ""
+
+    echo "Do you want to bootstrap the project? [Y/n]:"
+    read bootstrap_project
+    if [ "$bootstrap_project" != "n" ]
+    then
+      (cd $1 && script/bootstrap)
+    fi
   else
     echo " → Skipping generation of .env file"
     echo ""
