@@ -13,7 +13,7 @@ then
   fi
   if [ "$USE_SUBMODULES" == "true" ]
   then
-    carthage_cmd="$carthage_cmd --use-submodules"
+    carthage_cmd="$carthage_cmd --use-submodules --no-build"
   fi
   eval $carthage_cmd
 elif [ -f Podfile ]
