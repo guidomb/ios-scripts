@@ -28,7 +28,9 @@ The install script will prompt you if you want to install git hooks (recommended
 
 ## Usage
 
-After installing the scripts in your iOS project you should find a `script` folder with the following scripts
+All the scripts must be run from the root folder by prefixing the `script` folder. For example if you want to bootstrap your project you should be located at the project's root folder and then run `script/bootstrap`.
+
+After installing the scripts in your iOS project you should find a `script` folder with the following scripts:
 
 ### script/bootstrap
 
