@@ -49,11 +49,23 @@ generate_env_file ()
       fi
     fi
 
+    echo ""
+    echo "Do you want to install githooks when bootstrapping the project? [Y/n]"
+    read install_githooks
+    if [ "$install_githooks" != "n" ]
+    then
+      install_githooks="y"
+    fi
+
     if [ -f $1/Cartfile ]
     then
       echo ""
       echo "Do you want to use ssh to checkout dependencies with Carthage? [N/y]"
       read use_ssh
+
+      echo ""
+      echo "Do you want to use submodules when checking out dependencies with Carthage? [N/y]"
+      read use_submodules
     fi
 
     echo "
@@ -65,6 +77,14 @@ XCODE_PROJECT=$xcode_project_file" > "$1/script/.env"
     if [ "$use_ssh" == "y" ]
     then
       echo "USE_SSH=true" >> "$1/script/.env"
+    fi
+    if [ "$use_submodules" == "y" ]
+    then
+      echo "USE_SUBMODULES=true" >> "$1/script/.env"
+    fi
+    if [ "$install_githooks" == "y" ]
+    then
+      echo "INSTALL_GITHOOKS=true" >> "$1/script/.env"
     fi
 
     echo " → '$1/script/.env' successfully generated"

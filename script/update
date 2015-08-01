@@ -9,6 +9,10 @@ then
   then
     carthage_cmd="$carthage_cmd --use-ssh"
   fi
+  if [ "$USE_SUBMODULES" == "true" ]
+  then
+    carthage_cmd="$carthage_cmd --use-submodules"
+  fi
   eval $carthage_cmd
 elif [ -f Podfile ]
 then
