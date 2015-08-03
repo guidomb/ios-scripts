@@ -42,6 +42,45 @@ By default this script install the basic dependencies for any iOS project to wor
 
 In case you need to install more dependencies or execute some configuration script, the appropriate way to do this is by adding a bootstrap hook. If you create an executable script in `script/script_hooks/bootstrap` that script will be called during the bootstrap process.
 
+#### Build configuration for Travis CI
+
+If you are using Travis CI to build and test your project you only need to tell travis to
+execute `script/cibuild`
+
+```yaml
+language: objective-c
+osx_image: xcode6.4
+script: script/cibuild
+branches:
+  only:
+  - master
+```
+
+Remember to export the required environmental variables using the `travis` command line tool
+
+```
+travis encrypt GITHUB_ACCESS_TOKEN=your-access-token --add env.global
+travis encrypt KEY_PASSWORD=dev-certificate-passphrase --add env.global
+travis encrypt COVERALLS_TOKEN=coveralls-repo-token --add env.global
+```
+
+#### Build configuration for Circle CI
+
+If you are using Circle CI to build and test your project you only need to tell Circle to
+execute `script/cibuild`
+
+```yaml
+machine:
+  xcode:
+    version: "6.3.1"
+test:
+  override:
+    - script/cibuild
+```
+
+Remember to export the required environmental variables in the project's setting from the Circle CI web tool.
+
+
 ### script/build
 
 The build script just builds the project
