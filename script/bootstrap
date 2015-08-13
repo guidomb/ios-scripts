@@ -14,7 +14,7 @@ install_homebrew ()
     echo "    ✔ brew is already installed"
     echo ""
     echo " → Updating homebrew formulas"
-    brew update > /dev/null
+    brew update > /dev/null || brew update > /dev/null
     echo "    ✔ formulas updated"
   else
     command -v ruby >/dev/null 2>&1 || { echo >&2 "Error: Some ruby of version is required to install homebrew. Aborting"; exit 1; }
