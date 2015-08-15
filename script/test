@@ -25,7 +25,7 @@ run_tests ()
   fi
   if type bundle > /dev/null && bundle show xcpretty > /dev/null
   then
-    test_command="$test_command | xcpretty -c"
+    test_command="$test_command | bundle exec xcpretty -c"
     if [ ! -z "$CIRCLE_TEST_REPORTS" ]
     then
       test_command="$test_command --report junit --output $CIRCLE_TEST_REPORTS/xcode/results.xml"
