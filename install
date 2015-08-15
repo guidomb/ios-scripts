@@ -20,14 +20,6 @@ generate_env_file ()
     done
 
     echo ""
-    echo "Enter the xcode scheme [$project_name]:"
-    read xcode_project_scheme
-    if [ -z "$xcode_project_scheme" ]
-    then
-      xcode_project_scheme=$project_name
-    fi
-
-    echo ""
     echo "Enter 'project' or 'workspace' depending on what you use [project]:"
     read xcode_file
     if [ "$xcode_file" == "workspace" ]
@@ -70,7 +62,6 @@ generate_env_file ()
 
     echo "
 PROJECT_NAME=$project_name
-XCODE_SCHEME=$xcode_project_scheme
 XCODE_WORKSPACE=$xcode_workspace_file
 XCODE_PROJECT=$xcode_project_file" > "$1/script/.env"
 
