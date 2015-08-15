@@ -104,24 +104,73 @@ XCODE_PROJECT=$xcode_project_file" > "$1/script/.env"
   fi
 }
 
-echo ""
-echo " → Installing scripts into '$1/script'"
-cp -r script $1
-echo ""
-echo "    ✔  Scripts successfully installed"
-echo ""
+commit_changes ()
+{
+  echo " → Committing changes in '$1'"
+  echo ""
+  cd $1
+  git add .
+  git ci -m "Updates build scripts." > /dev/null
+  echo "    ✔  Changes successfully commited"
+  echo ""
+}
 
-if [ ! -f "$1/script/.env" ]
-then
-  generate_env_file $1
-fi
+install_scripts()
+{
+  # Need to check if the working directory is clean before Installing
+  # script. We use '|| echo false' to avoid the script to fail in case
+  # the path where the scripts are going to be installed is not under
+  # git version control
+  local can_commit_changes="$(cd $1; git status --porcelain || echo false)"
 
-if [ -f $1/Cartfile ]
+  echo ""
+  echo " → Installing scripts into '$1/script'"
+  cp -r script $1
+  echo ""
+  echo "    ✔  Scripts successfully installed"
+  echo ""
+
+  if [ ! -f "$1/script/.env" ]
+  then
+    generate_env_file $1
+  fi
+
+  if [ -f $1/Cartfile ]
+  then
+    echo ""
+    echo " NOTE: Remember to add your .p12 in '$1/script/certificates'."
+    echo " For more information about why this is needed check:"
+    echo ""
+    echo "   https://github.com/Carthage/Carthage/pull/583"
+    echo ""
+  fi
+
+  if [ -z "$can_commit_changes" ]
+  then
+    commit_changes $1
+  else
+    echo "Cannot commit updated scripts for '$1'. Working directory is not clean."
+  fi
+}
+
+if [ -z "$1" ] && [ -f .installrc ]
 then
-  echo ""
-  echo " NOTE: Remember to add your .p12 in '$1/script/certificates'."
-  echo " For more information about why this is needed check:"
-  echo ""
-  echo "   https://github.com/Carthage/Carthage/pull/583"
-  echo ""
+  while read path
+  do
+    if [ -f "$path/script/.env" ]
+    then
+      install_scripts $path
+    else
+      echo "Skipping installation for '$path'. First time installation must be done separatelly."
+      echo "Run the following:"
+      echo "  ./install $path"
+      echo ""
+    fi
+  done < .installrc
+elif [ -z "$1" ]
+then
+  echo "You need to supply a path where to install the scripts or a '.installrc' file."
+  exit 1
+else
+  install_scripts $1
 fi

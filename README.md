@@ -18,6 +18,29 @@ cd ios-scripts
 
 The first time you run this script you would probably want to generate .env file that is needed for the scripts to work.
 
+### Batch install
+
+If you have more than one project that is using the build scripts it might be bummer to update your build scripts everytime a new version is released. That is why it is recommended to use the batch install option. All you need to do is add a `.installrc` file (which is git ignored) in the `ios-scripts` root directory. This file should contain full paths to
+the projects that are using the build scripts.
+
+For example if you add a `.installrc` file with the following content:
+
+```
+/Users/guidomb/Documents/Projects/MyFirstProject
+/Users/guidomb/Documents/Projects/MySecondProject
+/Users/guidomb/Documents/Projects/MyThirdProject
+```
+
+and then run `.install`, the install script will install the builds script for each of the listed project. Which is the same as running
+
+```
+./install /Users/guidomb/Documents/Projects/MyFirstProject
+./install /Users/guidomb/Documents/Projects/MySecondProject
+./install /Users/guidomb/Documents/Projects/MyThirdProject
+```
+
+Keep in mind that this only works for projects that have already installed the build scripts.
+
 ### Project configuration
 
 All the scripts are smart enough to detect if you are using Carthage or Cocoapods and tune their behavior to use the workflow that best suites the underlaying dependency management tool.
