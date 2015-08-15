@@ -4,8 +4,6 @@ A set of scripts to manage iOS projects. This scripts are inspired by [this](htt
 
 This scripts assume that you are using `xcodebuild` to build the project.
 
-**NOTE**: Because of [this](https://github.com/Carthage/Carthage/pull/605) issue in Carthage that hasn't been merged yet we need to use a custom build of Carthage. Also because of [this](https://github.com/Carthage/Carthage/pull/583) issue you need to add your `.p12` in `script/certificates` in your project to be able to sign the `.framework`.
-
 ## Installation
 
 To install the scripts into any iOS project you just need to run the install script (no pound intended :wink:)
@@ -135,11 +133,9 @@ Travis CI.
 
 If you are using Carthage in a machine with a shared public IP, like in Travis CI, you are sharing
 the GitHub rate limit quota with the rest of the clients. Because Carthage uses the GitHub API
-this could be a problem. That is why is recommended in such environments to use your own access token. The latest stable version of Carthage does not support providing a GitHub access token. This issue has been addressed in [this](https://github.com/Carthage/Carthage/pull/605) pull request but a new stable release hasn't been made yet. That is why we need to use a custom version of Carthage if you want this feature.
+this could be a problem. That is why is recommended in such environments to use your own access token.
 
 To tell Carthage to use your own access token and in order for the bootstrap script to install the custom version of Carthage you need to define the environmental variable `GITHUB_ACCESS_TOKEN`.
-
-Once a new stable release is made there will be no need to install a custom version of Carthage but in your CI machine you will still need to define the `GITHUB_ACCESS_TOKEN`.
 
 ##### Code signing certificates
 
