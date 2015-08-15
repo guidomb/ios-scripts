@@ -99,9 +99,11 @@ commit_changes ()
 {
   echo " → Committing changes in '$1'"
   echo ""
+  local current_directory=`pwd`
   cd $1
   git add .
   git ci -m "Updates build scripts." > /dev/null
+  cd $current_directory
   echo "    ✔  Changes successfully commited"
   echo ""
 }
