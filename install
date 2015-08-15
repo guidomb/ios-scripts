@@ -138,7 +138,12 @@ install_scripts()
 
   if [ -z "$can_commit_changes" ]
   then
-    commit_changes $1
+    if [ ! -z "$(cd $1; git status --porcelain || echo '')" ]
+    then
+      commit_changes $1
+    else
+      echo "Skipping commit for '$1'. Scripts were already up-to-date."
+    fi
   else
     echo "Cannot commit updated scripts for '$1'. Working directory is not clean."
   fi
