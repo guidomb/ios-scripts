@@ -45,7 +45,14 @@ then
 else
   source script/.env
 
-  for scheme in $(schemes)
+  if [ -z "$current_schemes" ]
+  then
+    echo ""
+    echo "ERROR: There are no schemes. Probably you forgot to share your schemes"
+    exit 1
+  fi
+
+  for scheme in $current_schemes
   do
     build_using_xcodebuild $scheme
   done
