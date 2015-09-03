@@ -59,7 +59,7 @@ The bootstrap script should be run every time the project is cloned. This script
 
 By default this script install the basic dependencies for any iOS project to work. It is smart enough the check if you are using Cocoapods or Carthage as the dependency manager.
 
-#### Customize boostrap process
+#### Customize bootstrap process
 
 In case you need to install more dependencies or execute some configuration script, the appropriate way to do this is by adding a bootstrap hook. If you create an executable script in `script/script_hooks/bootstrap` that script will be called during the bootstrap process.
 
