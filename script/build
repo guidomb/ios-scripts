@@ -2,8 +2,6 @@
 
 set -e
 
-source script/script_hooks/schemes
-
 build_using_carthage ()
 {
   carthage_cmd="carthage build --no-skip-current --platform ios"
@@ -41,7 +39,9 @@ then
   build_using_carthage
 else
   source script/.env
+  source script/script_hooks/schemes
 
+  current_schemes=$(schemes)
   if [ -z "$current_schemes" ]
   then
     echo ""
