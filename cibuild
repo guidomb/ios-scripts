@@ -6,6 +6,6 @@ set -e
 cp ./certificates/cibot.p12 ./tests/carthage/script/certificates
 
 cd tests/carthage
+script/cibuild
 script/build
 script/update
-script/cibuild
