@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -e
+
+./install ./tests/carthage
+cp ./certificates/cibot.p12 ./tests/carthage/script/certificates
+
+cd tests/carthage
+script/build
+script/update
+script/cibuild
