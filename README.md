@@ -141,6 +141,20 @@ To tell Carthage to use your own access token and in order for the bootstrap scr
 
 Because Carthage builds all the dependencies and generates a fat `.framework` with binaries for all the possible architectures (iWatch, iPhone, simulator). It needs to sign the artifacts using a code signing certificate. There is an open [issue](https://github.com/Carthage/Carthage/pull/583) to solve this problem but for now you need to provide a `.p12` file with a development certificate and store them in `script/certificates/cibot.p12`. You will also need to provide the passphrase for the certificate in the environmental variable `KEY_PASSWORD`.
 
+### Configuring project schemes
+
+Both the `test` and `build` scripts need to know the schemes that are going to be build by `xcodebuild`. The scripts try to automatically infer the schemes by parsing the output from `xcodebuild -list`. But sometimes it may not work (most likely when using Cocoapods) or you may want to customize it. You can do so by customizing the `schemes` function in `script/script_hooks/schemes`.
+
+Lets say you just want to build and test only for `MyScheme1` and `MyScheme2`. Then you must implement the `schemes` function like this:
+
+```bash
+schemes ()
+{
+  echo "MyScheme1 MyScheme2"
+}
+```
+
+
 ## License
 
 **ios-scripts** is available under the Apache 2.0 [license](https://raw.githubusercontent.com/guidomb/ios-scripts/master/LICENSE).

@@ -2,6 +2,8 @@
 
 set -e
 
+source script/script_hooks/schemes
+
 build_using_carthage ()
 {
   carthage_cmd="carthage build --no-skip-current --platform ios"
@@ -32,11 +34,6 @@ build_using_xcodebuild ()
   echo " → Building scheme '$1'"
   echo ""
   eval $build_command
-}
-
-schemes ()
-{
-  xcodebuild -list | awk '{if(found) print} /Schemes/{found=1}' | awk '{$1=$1};1'
 }
 
 if [ ! -f $XCODE_WORKSPACE ] && [ -f Cartfile ] && type carthage > /dev/null
