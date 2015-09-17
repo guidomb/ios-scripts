@@ -43,6 +43,19 @@ Keep in mind that this only works for projects that have already installed the b
 
 All the scripts are smart enough to detect if you are using Carthage or Cocoapods and tune their behavior to use the workflow that best suites the underlaying dependency management tool.
 
+#### Project schemes
+
+Both the `test` and `build` scripts need to know the schemes that are going to be built by `xcodebuild`. The scripts try to automatically infer the schemes by parsing the output from `xcodebuild -list` but sometimes it may not work (most likely when using Cocoapods) or you may want to customize it. You can do so by changing the `schemes` function in `script/script_hooks/schemes`.
+
+Lets say you want to build and test only for `MyScheme1` and `MyScheme2`. Then you must implement the `schemes` function like this:
+
+```bash
+schemes ()
+{
+  echo "MyScheme1 MyScheme2"
+}
+```
+
 #### Git hooks
 
 The install script will prompt you if you want to install git hooks (recommended). At the moment it will install a `pre-push` hook that will run `script/test` before pushing.
@@ -140,20 +153,6 @@ To tell Carthage to use your own access token and in order for the bootstrap scr
 ##### Code signing certificates
 
 Because Carthage builds all the dependencies and generates a fat `.framework` with binaries for all the possible architectures (iWatch, iPhone, simulator). It needs to sign the artifacts using a code signing certificate. There is an open [issue](https://github.com/Carthage/Carthage/pull/583) to solve this problem but for now you need to provide a `.p12` file with a development certificate and store them in `script/certificates/cibot.p12`. You will also need to provide the passphrase for the certificate in the environmental variable `KEY_PASSWORD`.
-
-### Configuring project schemes
-
-Both the `test` and `build` scripts need to know the schemes that are going to be build by `xcodebuild`. The scripts try to automatically infer the schemes by parsing the output from `xcodebuild -list`. But sometimes it may not work (most likely when using Cocoapods) or you may want to customize it. You can do so by customizing the `schemes` function in `script/script_hooks/schemes`.
-
-Lets say you just want to build and test only for `MyScheme1` and `MyScheme2`. Then you must implement the `schemes` function like this:
-
-```bash
-schemes ()
-{
-  echo "MyScheme1 MyScheme2"
-}
-```
-
 
 ## License
 
