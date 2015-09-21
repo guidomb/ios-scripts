@@ -30,6 +30,7 @@ run_tests ()
 
   echo ""
   echo " → Running tests for scheme '$1'"
+  echo " $test_command"
   echo ""
   eval $test_command
 }
