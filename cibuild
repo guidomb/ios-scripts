@@ -13,9 +13,9 @@ cd tests/carthage
 echo ""
 echo "----- Running script/cibuild -----"
 echo ""
-script/cibuild
+VERBOSE=1 script/cibuild
 
 echo ""
 echo "----- Running script/build -----"
 echo ""
-script/build
+VERBOSE=1 script/build
