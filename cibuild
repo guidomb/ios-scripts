@@ -5,7 +5,16 @@ set -e
 ./install ./tests/carthage
 cp ./certificates/cibot.p12 ./tests/carthage/script/certificates
 
+echo "------------------------------------------------------"
+echo "----- Testing scripts for Carthage based project -----"
+echo "------------------------------------------------------"
 cd tests/carthage
+
+echo "----- Running script/cibuild -----"
 script/cibuild
+
+echo "----- Running script/build -----"
 script/build
+
+echo "----- Running script/update -----"
 script/update
