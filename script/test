@@ -31,6 +31,10 @@ run_tests ()
   echo ""
   echo " → Running tests for scheme '$1'"
   echo ""
+  if [ ! -z "$VERBOSE" ]
+  then
+    echo $test_command
+  fi
   eval $test_command
 }
 
