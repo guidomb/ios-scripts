@@ -10,11 +10,12 @@ echo "----- Testing scripts for Carthage based project -----"
 echo "------------------------------------------------------"
 cd tests/carthage
 
+echo ""
 echo "----- Running script/cibuild -----"
+echo ""
 script/cibuild
 
+echo ""
 echo "----- Running script/build -----"
+echo ""
 script/build
-
-echo "----- Running script/update -----"
-script/update
