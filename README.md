@@ -1,5 +1,7 @@
 # iOS Scripts
 
+[![Build Status](https://travis-ci.org/guidomb/ios-scripts.svg)](https://travis-ci.org/guidomb/ios-scripts)
+
 A set of scripts to manage iOS projects. This scripts are inspired by [this](http://githubengineering.com/scripts-to-rule-them-all/) GitHub engineering blog post and [this](https://github.com/jspahrsummers/objc-build-scripts) repository from [jspahrsummers](https://github.com/jspahrsummers).
 
 This scripts assume that you are using `xcodebuild` to build the project.
