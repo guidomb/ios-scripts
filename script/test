@@ -14,7 +14,7 @@ run_tests ()
   else
     test_command="$test_command -workspace $XCODE_WORKSPACE"
   fi
-  test_command="$test_command -sdk iphonesimulator clean build test -configuration Debug"
+  test_command="$test_command -sdk iphonesimulator -destination \"platform=iOS Simulator,OS=latest,name=iPhone 6\" clean build test -configuration Debug"
   if [ ! -z "$CIRCLE_ARTIFACTS" ]
   then
     test_command="$test_command | tee $CIRCLE_ARTIFACTS/xcode_raw.log"
