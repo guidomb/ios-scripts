@@ -1,0 +1,19 @@
+#!/bin/bash
+scheme_destination ()
+{
+  shopt -s nocasematch
+
+  case "$1" in
+  *iOS) 
+    destination="'platform=iOS Simulator,name=iPhone 6'"
+    ;;
+  *OSX) 
+    destination="'platform=OS X'"
+    ;;
+  *) 
+    destination="'platform=iOS Simulator,name=iPhone 6'"
+    ;;
+  esac
+
+  echo $destination
+}
