@@ -64,6 +64,26 @@ schemes ()
 }
 ```
 
+#### xcodebuild `-destination` parameter 
+
+In order to run your test, `xcodebuild` needs an extra parameter to specify where. 
+The scripts pick the correct destination using the scheme name using the following pattern (case insensitive)
+
+* `*-iOS`: for iOS
+* `*-OSX`: for OSX targets
+> If the scheme name does not match any of these, iOS destination will be used.
+
+These are the default values for each platform
+
+* iOS: `'platform=iOS Simulator,name=iPhone 6,OS=latest'`
+* OSX: `'platform=OS X'`
+
+You can override this values using either `DEFAULT_OSX_DESTINATION` or `DEFAULT_IOS_DESTINATION` env variables, or for iOS you can override OS version with `IOS_OS_VERSION` and/or simulator name with `IOS_SIMULATOR_NAME`, for example:
+
+```bash
+IOS_OS_VERSION="9.0" IOS_SIMULATOR_NAME="iPhone 6s" script/cibuild
+```
+
 #### Git hooks
 
 The install script will prompt you if you want to install git hooks (recommended). At the moment it will install a `pre-push` hook that will run `script/test` before pushing.
