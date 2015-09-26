@@ -5,13 +5,13 @@ scheme_destination ()
 
   case "$1" in
   *iOS) 
-    destination="'platform=iOS Simulator,name=iPhone 6'"
+    destination="'platform=iOS Simulator,name=iPhone 6,OS=latest'"
     ;;
   *OSX) 
     destination="'platform=OS X'"
     ;;
   *) 
-    destination="'platform=iOS Simulator,name=iPhone 6'"
+    destination="'platform=iOS Simulator,name=iPhone 6,OS=latest'"
     ;;
   esac
 
