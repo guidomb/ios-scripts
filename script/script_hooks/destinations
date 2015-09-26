@@ -1,17 +1,34 @@
 #!/bin/bash
+
+if [ -z "$DEFAULT_OSX_DESTINATION" ]; then
+  DEFAULT_OSX_DESTINATION="'platform=OS X'"
+fi
+
+if [ -z "$IOS_OS_VERSION" ]; then
+  IOS_OS_VERSION="latest"
+fi
+
+if [ -z "$IOS_SIMULATOR_NAME" ]; then
+  IOS_SIMULATOR_NAME="iPhone 6"
+fi
+
+if [ -z "$DEFAULT_IOS_DESTINATION" ]; then
+  DEFAULT_IOS_DESTINATION="'platform=iOS Simulator,name=$IOS_SIMULATOR_NAME,OS=$IOS_OS_VERSION'"
+fi
+
 scheme_destination ()
 {
   shopt -s nocasematch
 
   case "$1" in
   *iOS) 
-    destination="'platform=iOS Simulator,name=iPhone 6,OS=latest'"
+    destination=$DEFAULT_IOS_DESTINATION
     ;;
   *OSX) 
-    destination="'platform=OS X'"
+    destination=$DEFAULT_OSX_DESTINATION
     ;;
   *) 
-    destination="'platform=iOS Simulator,name=iPhone 6,OS=latest'"
+    destination=$DEFAULT_IOS_DESTINATION
     ;;
   esac
 
