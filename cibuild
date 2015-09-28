@@ -3,7 +3,6 @@
 set -e
 
 ./install ./tests/carthage
-cp ./certificates/cibot.p12 ./tests/carthage/script/certificates
 
 echo "------------------------------------------------------"
 echo "----- Testing scripts for Carthage based project -----"
