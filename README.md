@@ -41,6 +41,12 @@ and then run `.install`, the install script will install the builds script for e
 
 Keep in mind that this only works for projects that have already installed the build scripts.
 
+### Carthage users
+
+If you use Carthage you can specify the required carthage version by your project in `script/.env` by setting the `REQUIRED_CARTHAGE_VERSION` variable.
+
+All build script will check if the Carthage version matches the required version. If that is not the case the scripts will fail.
+
 ### Project configuration
 
 All the scripts are smart enough to detect if you are using Carthage or Cocoapods and tune their behavior to use the workflow that best suites the underlaying dependency management tool.
