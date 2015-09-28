@@ -129,16 +129,6 @@ install_scripts()
     generate_env_file $1
   fi
 
-  if [ -f $1/Cartfile ]
-  then
-    echo ""
-    echo " NOTE: Remember to add your .p12 in '$1/script/certificates'."
-    echo " For more information about why this is needed check:"
-    echo ""
-    echo "   https://github.com/Carthage/Carthage/pull/583"
-    echo ""
-  fi
-
   if [ -z "$can_commit_changes" ]
   then
     if [ ! -z "$(cd $1; git status --porcelain || echo '')" ]

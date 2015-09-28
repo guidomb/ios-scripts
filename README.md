@@ -158,10 +158,6 @@ this could be a problem. That is why is recommended in such environments to use 
 
 To tell Carthage to use your own access token and in order for the bootstrap script to install the custom version of Carthage you need to define the environmental variable `GITHUB_ACCESS_TOKEN`.
 
-##### Code signing certificates
-
-Because Carthage builds all the dependencies and generates a fat `.framework` with binaries for all the possible architectures (iWatch, iPhone, simulator). It needs to sign the artifacts using a code signing certificate. There is an open [issue](https://github.com/Carthage/Carthage/pull/583) to solve this problem but for now you need to provide a `.p12` file with a development certificate and store them in `script/certificates/cibot.p12`. You will also need to provide the passphrase for the certificate in the environmental variable `KEY_PASSWORD`.
-
 ## License
 
 **ios-scripts** is available under the Apache 2.0 [license](https://raw.githubusercontent.com/guidomb/ios-scripts/master/LICENSE).
