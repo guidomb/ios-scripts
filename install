@@ -61,6 +61,7 @@ generate_env_file ()
     fi
 
     echo "
+REQUIRED_CARTHAGE_VERSION=0.9.2
 PROJECT_NAME=$project_name
 XCODE_WORKSPACE=$xcode_workspace_file
 XCODE_PROJECT=$xcode_project_file" > "$1/script/.env"
