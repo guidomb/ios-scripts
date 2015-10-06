@@ -81,7 +81,7 @@ The bootstrap script should be run every time the project is cloned. This script
 By default this script install the basic dependencies for any iOS project to work. It is smart enough the check if you are using Cocoapods or Carthage as the dependency manager.
 
 You can skip updating brew formulas by defining `SKIP_BREW_FORMULAS_UPDATE` environmental variable. For example `SKIP_BREW_FORMULAS_UPDATE=1 script/bootstrap`. Which is useful when you are running the bootstrap script
-several time to add or test new functionality. 
+several time to add or test new functionality.
 
 #### Customize bootstrap process
 
@@ -160,6 +160,10 @@ the GitHub rate limit quota with the rest of the clients. Because Carthage uses 
 this could be a problem. That is why is recommended in such environments to use your own access token.
 
 To tell Carthage to use your own access token and in order for the bootstrap script to install the custom version of Carthage you need to define the environmental variable `GITHUB_ACCESS_TOKEN`.
+
+### General configuration variables
+
+ * `VERBOSE` if you set the `VERBOSE` environmental with a value the scripts will print more information.
 
 ## License
 
