@@ -12,10 +12,14 @@ install_homebrew ()
   if type brew > /dev/null
   then
     echo "    ✔ brew is already installed"
-    echo ""
-    echo " → Updating homebrew formulas"
-    brew update > /dev/null || brew update > /dev/null
-    echo "    ✔ formulas updated"
+
+    if [ -z "$SKIP_BREW_FORMULAS_UPDATE" ]
+    then
+      echo ""
+      echo " → Updating homebrew formulas"
+      brew update > /dev/null || brew update > /dev/null
+      echo "    ✔ formulas updated"
+    fi
   else
     command -v ruby >/dev/null 2>&1 || { echo >&2 "Error: Some ruby of version is required to install homebrew. Aborting"; exit 1; }
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
