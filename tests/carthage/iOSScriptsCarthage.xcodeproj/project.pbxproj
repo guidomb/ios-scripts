@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		9DEC355D1BAB737B00729239 /* iOSScriptsCarthage.h in Headers */ = {isa = PBXBuildFile; fileRef = 9DEC355C1BAB737B00729239 /* iOSScriptsCarthage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9DEC35631BAB737B00729239 /* iOSScriptsCarthage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DEC35571BAB737B00729239 /* iOSScriptsCarthage.framework */; };
-		9DEC35751BAB757E00729239 /* Box.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DEC35731BAB757E00729239 /* Box.framework */; };
 		9DEC35761BAB757E00729239 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DEC35741BAB757E00729239 /* Result.framework */; };
 		9DEC35791BAB759500729239 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DEC35771BAB759500729239 /* Nimble.framework */; };
 		9DEC357A1BAB759500729239 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DEC35781BAB759500729239 /* Quick.framework */; };
@@ -33,7 +32,6 @@
 		9DEC355C1BAB737B00729239 /* iOSScriptsCarthage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iOSScriptsCarthage.h; sourceTree = "<group>"; };
 		9DEC35621BAB737B00729239 /* iOSScriptsCarthageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSScriptsCarthageTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DEC35681BAB737B00729239 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9DEC35731BAB757E00729239 /* Box.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Box.framework; path = Carthage/Build/iOS/Box.framework; sourceTree = "<group>"; };
 		9DEC35741BAB757E00729239 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
 		9DEC35771BAB759500729239 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		9DEC35781BAB759500729239 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
@@ -47,7 +45,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9DEC35751BAB757E00729239 /* Box.framework in Frameworks */,
 				9DEC35761BAB757E00729239 /* Result.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -70,7 +67,6 @@
 			children = (
 				9DEC35771BAB759500729239 /* Nimble.framework */,
 				9DEC35781BAB759500729239 /* Quick.framework */,
-				9DEC35731BAB757E00729239 /* Box.framework */,
 				9DEC35741BAB757E00729239 /* Result.framework */,
 				9DEC35591BAB737B00729239 /* iOSScriptsCarthage */,
 				9DEC35661BAB737B00729239 /* iOSScriptsCarthageTests */,
@@ -181,7 +177,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = guidomb;
 				TargetAttributes = {
 					9DEC35561BAB737B00729239 = {
@@ -234,7 +230,6 @@
 			files = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/Box.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Quick.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Nimble.framework",
@@ -298,6 +293,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -379,6 +375,7 @@
 				INFOPLIST_FILE = iOSScriptsCarthage/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "me.guidomb.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -400,6 +397,7 @@
 				INFOPLIST_FILE = iOSScriptsCarthage/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "me.guidomb.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -410,7 +408,6 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
@@ -420,6 +417,7 @@
 				);
 				INFOPLIST_FILE = iOSScriptsCarthageTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "me.guidomb.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "iOSScriptsCarthageTests/iOSScriptsCarthageTests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -431,12 +429,12 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = iOSScriptsCarthageTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "me.guidomb.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "iOSScriptsCarthageTests/iOSScriptsCarthageTests-Bridging-Header.h";
 			};
