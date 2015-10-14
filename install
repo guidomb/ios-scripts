@@ -49,7 +49,7 @@ generate_env_file ()
       install_githooks="y"
     fi
 
-    if [ -f $1/Cartfile ]
+    if [ -f $1/Cartfile ] || [ -f $1/Cartfile.private ]
     then
       echo ""
       echo "Do you want to use ssh to checkout dependencies with Carthage? [N/y]"
