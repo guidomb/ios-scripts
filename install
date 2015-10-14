@@ -52,6 +52,10 @@ generate_env_file ()
     if [ -f $1/Cartfile ] || [ -f $1/Cartfile.private ]
     then
       echo ""
+      echo "What version of Carthage should we use? [0.9.2]"
+      read required_carthage_version
+
+      echo ""
       echo "Do you want to use ssh to checkout dependencies with Carthage? [N/y]"
       read use_ssh
 
@@ -60,8 +64,13 @@ generate_env_file ()
       read use_submodules
     fi
 
+    if [ -z "$required_carthage_version" ]
+    then
+      required_carthage_version="0.9.2"
+    fi
+
     echo "
-REQUIRED_CARTHAGE_VERSION=0.9.2
+REQUIRED_CARTHAGE_VERSION=$required_carthage_version
 PROJECT_NAME=$project_name
 XCODE_WORKSPACE=$xcode_workspace_file
 XCODE_PROJECT=$xcode_project_file" > "$1/script/.env"
