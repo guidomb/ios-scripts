@@ -64,6 +64,50 @@ generate_env_file ()
       read use_submodules
     fi
 
+    echo ""
+    echo "Do you want to define iOS destination value for xcodebuild? [N/y]:"
+    read override_ios_destination
+    if [ "$override_ios_destination" == "y" ]
+    then
+      echo ""
+      echo "iOS version [latest]:"
+      read ios_destination_version
+      if [ -z "$ios_destination_version" ]
+      then
+        ios_destination_version="latest"
+      fi
+
+      echo ""
+      echo "iOS simulator name [iPhone 6]:"
+      read ios_destination_simulator_name
+      if [ -z "$ios_destination_simulator_name" ]
+      then
+        ios_destination_simulator_name="iPhone 6"
+      fi
+
+      echo ""
+      echo "Use destination ['platform=iOS Simulator,name=$ios_destination_simulator_name,OS=$ios_destination_version']?:"
+      read ios_destination_default
+      if [ -z "$ios_destination_default" ]
+      then
+        ios_destination_default="'platform=iOS Simulator,name=$ios_destination_simulator_name,OS=$ios_destination_version'"
+      fi
+    fi
+
+    echo ""
+    echo "Do you want to define OS X destination value for xcodebuild? [N/y]:"
+    read override_osx_destination
+    if [ "$override_osx_destination" == "y" ]
+    then
+      echo ""
+      echo "Use destination ['platform=OS X']?:"
+      read osx_destination_default
+      if [ -z "$osx_destination_default" ]
+      then
+        osx_destination_default="'platform=OS X'"
+      fi
+    fi
+
     if [ -z "$required_carthage_version" ]
     then
       required_carthage_version="0.9.2"
@@ -86,6 +130,16 @@ XCODE_PROJECT=$xcode_project_file" > "$1/script/.env"
     if [ "$install_githooks" == "y" ]
     then
       echo "INSTALL_GITHOOKS=true" >> "$1/script/.env"
+    fi
+
+    if [ -n "$ios_destination_default" ]
+    then
+      echo "IOS_DESTINATION=$ios_destination_default" >> "$1/script/.env"
+    fi
+
+    if [ -n "$osx_destination_default" ]
+    then
+      echo "OSX_DESTINATION=$osx_destination_default" >> "$1/script/.env"
     fi
 
     echo " → '$1/script/.env' successfully generated"
