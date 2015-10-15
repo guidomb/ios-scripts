@@ -64,6 +64,12 @@ schemes ()
 }
 ```
 
+Or you can override this by defining the variable `SCHEME` like this
+
+```bash
+SCHEME=MyScheme ./script/cibuild
+```
+
 #### xcodebuild `-destination` parameter 
 
 In order to run your test, `xcodebuild` needs an extra parameter to specify where. 
@@ -71,17 +77,25 @@ The scripts pick the correct destination using the scheme name using the followi
 
 * `*-iOS`: for iOS
 * `*-OSX`: for OSX targets
-> If the scheme name does not match any of these, iOS destination will be used.
+> If the scheme name does not match any of these, iOS destination will be used by default.
 
 These are the default values for each platform
 
 * iOS: `'platform=iOS Simulator,name=iPhone 6,OS=latest'`
 * OSX: `'platform=OS X'`
 
-You can override this values using either `DEFAULT_OSX_DESTINATION` or `DEFAULT_IOS_DESTINATION` env variables, or for iOS you can override OS version with `IOS_OS_VERSION` and/or simulator name with `IOS_SIMULATOR_NAME`, for example:
+For iOS you can change the name of the simulator or the OS version it should emulate. 
+To use a different emulator just define the variable `IOS_DESTINATION_SIMULATOR_NAME` with the name of the simulator to use
 
 ```bash
-IOS_OS_VERSION="9.0" IOS_SIMULATOR_NAME="iPhone 6s" script/cibuild
+IOS_DESTINATION_SIMULATOR_NAME="iPhone 6s Plus" script/cibuild
+```
+> For all possible names, just run `xcrun simctl list devicetypes` 
+
+To use a different OS just define the variable `IOS_DESTINATION_VERSION` with the OS version to use
+
+```bash
+IOS_DESTINATION_VERSION="9.0" script/cibuild
 ```
 
 #### Git hooks
