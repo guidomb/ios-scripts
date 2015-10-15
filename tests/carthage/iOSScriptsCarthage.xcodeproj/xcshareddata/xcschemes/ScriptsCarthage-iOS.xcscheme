@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "9DEC35561BAB737B00729239"
-               BuildableName = "iOSScriptsCarthage.framework"
-               BlueprintName = "iOSScriptsCarthage"
+               BuildableName = "ScriptsCarthage.framework"
+               BlueprintName = "ScriptsCarthage-iOS"
                ReferencedContainer = "container:iOSScriptsCarthage.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -29,8 +29,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "9DEC35611BAB737B00729239"
-               BuildableName = "iOSScriptsCarthageTests.xctest"
-               BlueprintName = "iOSScriptsCarthageTests"
+               BuildableName = "ScriptsCarthageTests-iOS.xctest"
+               BlueprintName = "ScriptsCarthageTests-iOS"
                ReferencedContainer = "container:iOSScriptsCarthage.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -47,8 +47,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "9DEC35611BAB737B00729239"
-               BuildableName = "iOSScriptsCarthageTests.xctest"
-               BlueprintName = "iOSScriptsCarthageTests"
+               BuildableName = "ScriptsCarthageTests-iOS.xctest"
+               BlueprintName = "ScriptsCarthageTests-iOS"
                ReferencedContainer = "container:iOSScriptsCarthage.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -57,8 +57,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "9DEC35561BAB737B00729239"
-            BuildableName = "iOSScriptsCarthage.framework"
-            BlueprintName = "iOSScriptsCarthage"
+            BuildableName = "ScriptsCarthage.framework"
+            BlueprintName = "ScriptsCarthage-iOS"
             ReferencedContainer = "container:iOSScriptsCarthage.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -79,8 +79,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "9DEC35561BAB737B00729239"
-            BuildableName = "iOSScriptsCarthage.framework"
-            BlueprintName = "iOSScriptsCarthage"
+            BuildableName = "ScriptsCarthage.framework"
+            BlueprintName = "ScriptsCarthage-iOS"
             ReferencedContainer = "container:iOSScriptsCarthage.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -97,8 +97,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "9DEC35561BAB737B00729239"
-            BuildableName = "iOSScriptsCarthage.framework"
-            BlueprintName = "iOSScriptsCarthage"
+            BuildableName = "ScriptsCarthage.framework"
+            BlueprintName = "ScriptsCarthage-iOS"
             ReferencedContainer = "container:iOSScriptsCarthage.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

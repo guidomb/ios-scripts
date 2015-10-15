@@ -9,7 +9,7 @@
 import Foundation
 import Quick
 import Nimble
-import iOSScriptsCarthage
+import ScriptsCarthage
 
 class GreeterSpec: QuickSpec {
     

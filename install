@@ -49,8 +49,12 @@ generate_env_file ()
       install_githooks="y"
     fi
 
-    if [ -f $1/Cartfile ]
+    if [ -f $1/Cartfile ] || [ -f $1/Cartfile.private ]
     then
+      echo ""
+      echo "What version of Carthage should we use? [0.9.2]"
+      read required_carthage_version
+
       echo ""
       echo "Do you want to use ssh to checkout dependencies with Carthage? [N/y]"
       read use_ssh
@@ -58,13 +62,53 @@ generate_env_file ()
       echo ""
       echo "Do you want to use submodules when checking out dependencies with Carthage? [N/y]"
       read use_submodules
+
+      echo ""
+      echo "What platforms should Carthage build as a comma separated list? [iOS]"
+      read carthage_platforms
     fi
 
+    echo ""
+    echo "Do you want to define iOS destination value for xcodebuild? [N/y]:"
+    read override_ios_destination
+    if [ "$override_ios_destination" == "y" ]
+    then
+      echo ""
+      echo "iOS version [latest]:"
+      read ios_destination_version
+
+      echo ""
+      echo "iOS simulator name [iPhone 6]:"
+      read ios_destination_simulator_name
+    fi
+
+    echo ""
+    echo "Do you want to define OS X destination value for xcodebuild? [N/y]:"
+    read override_osx_destination
+    if [ "$override_osx_destination" == "y" ]
+    then
+      echo ""
+      echo "OSX arch [current]?:"
+      read osx_destination_arch
+    fi
+
+    if [ -z "$required_carthage_version" ]
+    then
+      required_carthage_version="0.9.2"
+    fi
+
+    ios_destination_version=${ios_destination_version:-"latest"}
+    ios_destination_simulator_name=${ios_destination_simulator_name:-"iPhone 6"}
+    carthage_platforms=${carthage_platforms:-"iOS"}
     echo "
-REQUIRED_CARTHAGE_VERSION=0.9.2
+REQUIRED_CARTHAGE_VERSION=$required_carthage_version
+CARTHAGE_BUILD_PLATFORM=\${CARTHAGE_BUILD_PLATFORM:-\"$carthage_platforms\"}
 PROJECT_NAME=$project_name
 XCODE_WORKSPACE=$xcode_workspace_file
-XCODE_PROJECT=$xcode_project_file" > "$1/script/.env"
+XCODE_PROJECT=$xcode_project_file
+IOS_DESTINATION_VERSION=\${IOS_DESTINATION_VERSION:-\"$ios_destination_version\"}
+IOS_DESTINATION_SIMULATOR_NAME=\${IOS_DESTINATION_SIMULATOR_NAME:-\"$ios_destination_simulator_name\"}
+OSX_DESTINATION_ARCH=\${OSX_DESTINATION_ARCH:-\"$osx_destination_arch\"}" > "$1/script/.env"
 
     if [ "$use_ssh" == "y" ]
     then

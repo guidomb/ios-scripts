@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5F4D27A11BCF48E6003C27B3 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F4D27A01BCF48E6003C27B3 /* Result.framework */; settings = {ASSET_TAGS = (); }; };
 		9DEC355D1BAB737B00729239 /* iOSScriptsCarthage.h in Headers */ = {isa = PBXBuildFile; fileRef = 9DEC355C1BAB737B00729239 /* iOSScriptsCarthage.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9DEC35631BAB737B00729239 /* iOSScriptsCarthage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DEC35571BAB737B00729239 /* iOSScriptsCarthage.framework */; };
-		9DEC35761BAB757E00729239 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DEC35741BAB757E00729239 /* Result.framework */; };
+		9DEC35631BAB737B00729239 /* ScriptsCarthage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DEC35571BAB737B00729239 /* ScriptsCarthage.framework */; };
 		9DEC35791BAB759500729239 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DEC35771BAB759500729239 /* Nimble.framework */; };
 		9DEC357A1BAB759500729239 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DEC35781BAB759500729239 /* Quick.framework */; };
 		9DEC357D1BAB75C500729239 /* GreeterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEC357C1BAB75C500729239 /* GreeterTests.swift */; };
@@ -27,12 +27,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		9DEC35571BAB737B00729239 /* iOSScriptsCarthage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = iOSScriptsCarthage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5F4D27A01BCF48E6003C27B3 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
+		9DEC35571BAB737B00729239 /* ScriptsCarthage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ScriptsCarthage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DEC355B1BAB737B00729239 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9DEC355C1BAB737B00729239 /* iOSScriptsCarthage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iOSScriptsCarthage.h; sourceTree = "<group>"; };
-		9DEC35621BAB737B00729239 /* iOSScriptsCarthageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSScriptsCarthageTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9DEC35621BAB737B00729239 /* ScriptsCarthageTests-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ScriptsCarthageTests-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DEC35681BAB737B00729239 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9DEC35741BAB757E00729239 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
 		9DEC35771BAB759500729239 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		9DEC35781BAB759500729239 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 		9DEC357B1BAB75C400729239 /* iOSScriptsCarthageTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iOSScriptsCarthageTests-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -45,7 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9DEC35761BAB757E00729239 /* Result.framework in Frameworks */,
+				5F4D27A11BCF48E6003C27B3 /* Result.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -55,19 +55,35 @@
 			files = (
 				9DEC35791BAB759500729239 /* Nimble.framework in Frameworks */,
 				9DEC357A1BAB759500729239 /* Quick.framework in Frameworks */,
-				9DEC35631BAB737B00729239 /* iOSScriptsCarthage.framework in Frameworks */,
+				9DEC35631BAB737B00729239 /* ScriptsCarthage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5F51D71B1BCDB83C00613162 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5F51D71C1BCDB84900613162 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5F51D71C1BCDB84900613162 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				5F4D27A01BCF48E6003C27B3 /* Result.framework */,
+				9DEC35771BAB759500729239 /* Nimble.framework */,
+				9DEC35781BAB759500729239 /* Quick.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
 		9DEC354D1BAB737B00729239 = {
 			isa = PBXGroup;
 			children = (
-				9DEC35771BAB759500729239 /* Nimble.framework */,
-				9DEC35781BAB759500729239 /* Quick.framework */,
-				9DEC35741BAB757E00729239 /* Result.framework */,
+				5F51D71B1BCDB83C00613162 /* Frameworks */,
 				9DEC35591BAB737B00729239 /* iOSScriptsCarthage */,
 				9DEC35661BAB737B00729239 /* iOSScriptsCarthageTests */,
 				9DEC35581BAB737B00729239 /* Products */,
@@ -77,8 +93,8 @@
 		9DEC35581BAB737B00729239 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9DEC35571BAB737B00729239 /* iOSScriptsCarthage.framework */,
-				9DEC35621BAB737B00729239 /* iOSScriptsCarthageTests.xctest */,
+				9DEC35571BAB737B00729239 /* ScriptsCarthage.framework */,
+				9DEC35621BAB737B00729239 /* ScriptsCarthageTests-iOS.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -133,9 +149,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		9DEC35561BAB737B00729239 /* iOSScriptsCarthage */ = {
+		9DEC35561BAB737B00729239 /* ScriptsCarthage-iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9DEC356D1BAB737B00729239 /* Build configuration list for PBXNativeTarget "iOSScriptsCarthage" */;
+			buildConfigurationList = 9DEC356D1BAB737B00729239 /* Build configuration list for PBXNativeTarget "ScriptsCarthage-iOS" */;
 			buildPhases = (
 				9DEC35521BAB737B00729239 /* Sources */,
 				9DEC35531BAB737B00729239 /* Frameworks */,
@@ -146,14 +162,14 @@
 			);
 			dependencies = (
 			);
-			name = iOSScriptsCarthage;
+			name = "ScriptsCarthage-iOS";
 			productName = iOSScriptsCarthage;
-			productReference = 9DEC35571BAB737B00729239 /* iOSScriptsCarthage.framework */;
+			productReference = 9DEC35571BAB737B00729239 /* ScriptsCarthage.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		9DEC35611BAB737B00729239 /* iOSScriptsCarthageTests */ = {
+		9DEC35611BAB737B00729239 /* ScriptsCarthageTests-iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9DEC35701BAB737B00729239 /* Build configuration list for PBXNativeTarget "iOSScriptsCarthageTests" */;
+			buildConfigurationList = 9DEC35701BAB737B00729239 /* Build configuration list for PBXNativeTarget "ScriptsCarthageTests-iOS" */;
 			buildPhases = (
 				9DEC355E1BAB737B00729239 /* Sources */,
 				9DEC355F1BAB737B00729239 /* Frameworks */,
@@ -165,9 +181,9 @@
 			dependencies = (
 				9DEC35651BAB737B00729239 /* PBXTargetDependency */,
 			);
-			name = iOSScriptsCarthageTests;
+			name = "ScriptsCarthageTests-iOS";
 			productName = iOSScriptsCarthageTests;
-			productReference = 9DEC35621BAB737B00729239 /* iOSScriptsCarthageTests.xctest */;
+			productReference = 9DEC35621BAB737B00729239 /* ScriptsCarthageTests-iOS.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -200,8 +216,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				9DEC35561BAB737B00729239 /* iOSScriptsCarthage */,
-				9DEC35611BAB737B00729239 /* iOSScriptsCarthageTests */,
+				9DEC35561BAB737B00729239 /* ScriptsCarthage-iOS */,
+				9DEC35611BAB737B00729239 /* ScriptsCarthageTests-iOS */,
 			);
 		};
 /* End PBXProject section */
@@ -230,7 +246,7 @@
 			files = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Quick.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Nimble.framework",
 			);
@@ -265,7 +281,7 @@
 /* Begin PBXTargetDependency section */
 		9DEC35651BAB737B00729239 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 9DEC35561BAB737B00729239 /* iOSScriptsCarthage */;
+			target = 9DEC35561BAB737B00729239 /* ScriptsCarthage-iOS */;
 			targetProxy = 9DEC35641BAB737B00729239 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -376,7 +392,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "me.guidomb.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = ScriptsCarthage;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -398,7 +414,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "me.guidomb.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = ScriptsCarthage;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -452,7 +468,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9DEC356D1BAB737B00729239 /* Build configuration list for PBXNativeTarget "iOSScriptsCarthage" */ = {
+		9DEC356D1BAB737B00729239 /* Build configuration list for PBXNativeTarget "ScriptsCarthage-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9DEC356E1BAB737B00729239 /* Debug */,
@@ -461,7 +477,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9DEC35701BAB737B00729239 /* Build configuration list for PBXNativeTarget "iOSScriptsCarthageTests" */ = {
+		9DEC35701BAB737B00729239 /* Build configuration list for PBXNativeTarget "ScriptsCarthageTests-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9DEC35711BAB737B00729239 /* Debug */,
