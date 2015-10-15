@@ -62,6 +62,10 @@ generate_env_file ()
       echo ""
       echo "Do you want to use submodules when checking out dependencies with Carthage? [N/y]"
       read use_submodules
+
+      echo ""
+      echo "What platforms should Carthage build as a comma separated? [iOS]"
+      read carthage_platforms
     fi
 
     echo ""
@@ -95,9 +99,10 @@ generate_env_file ()
 
     ios_destination_version=${ios_destination_version:-"latest"}
     ios_destination_simulator_name=${ios_destination_simulator_name:-"iPhone 6"}
-
+    carthage_platforms=${carthage_platforms:-"iOS"}
     echo "
 REQUIRED_CARTHAGE_VERSION=$required_carthage_version
+CARTHAGE_BUILD_PLATFORM=\${CARTHAGE_BUILD_PLATFORM:-\"$carthage_platforms\"}
 PROJECT_NAME=$project_name
 XCODE_WORKSPACE=$xcode_workspace_file
 XCODE_PROJECT=$xcode_project_file

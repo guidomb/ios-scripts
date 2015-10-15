@@ -4,9 +4,9 @@ IOS_DESTINATION="'platform=iOS Simulator,name=$IOS_DESTINATION_SIMULATOR_NAME,OS
 
 if [ -z "$OSX_DESTINATION_ARCH" ]
 then
-  OSX_DESTINATION="'platform=OS X,arch=$OSX_DESTINATION_ARCH'"
-else
   OSX_DESTINATION="'platform=OS X'"
+else
+  OSX_DESTINATION="'platform=OS X,arch=$OSX_DESTINATION_ARCH'"
 fi
 
 scheme_destination ()
