@@ -72,26 +72,10 @@ generate_env_file ()
       echo ""
       echo "iOS version [latest]:"
       read ios_destination_version
-      if [ -z "$ios_destination_version" ]
-      then
-        ios_destination_version="latest"
-      fi
 
       echo ""
       echo "iOS simulator name [iPhone 6]:"
       read ios_destination_simulator_name
-      if [ -z "$ios_destination_simulator_name" ]
-      then
-        ios_destination_simulator_name="iPhone 6"
-      fi
-
-      echo ""
-      echo "Use destination ['platform=iOS Simulator,name=$ios_destination_simulator_name,OS=$ios_destination_version']?:"
-      read ios_destination_default
-      if [ -z "$ios_destination_default" ]
-      then
-        ios_destination_default="'platform=iOS Simulator,name=$ios_destination_simulator_name,OS=$ios_destination_version'"
-      fi
     fi
 
     echo ""
@@ -100,12 +84,8 @@ generate_env_file ()
     if [ "$override_osx_destination" == "y" ]
     then
       echo ""
-      echo "Use destination ['platform=OS X']?:"
-      read osx_destination_default
-      if [ -z "$osx_destination_default" ]
-      then
-        osx_destination_default="'platform=OS X'"
-      fi
+      echo "OSX arch [current]?:"
+      read osx_destination_arch
     fi
 
     if [ -z "$required_carthage_version" ]
@@ -113,11 +93,17 @@ generate_env_file ()
       required_carthage_version="0.9.2"
     fi
 
+    ios_destination_version=${ios_destination_version:-"latest"}
+    ios_destination_simulator_name=${ios_destination_simulator_name:-"iPhone 6"}
+
     echo "
 REQUIRED_CARTHAGE_VERSION=$required_carthage_version
 PROJECT_NAME=$project_name
 XCODE_WORKSPACE=$xcode_workspace_file
-XCODE_PROJECT=$xcode_project_file" > "$1/script/.env"
+XCODE_PROJECT=$xcode_project_file
+IOS_DESTINATION_VERSION=\${IOS_DESTINATION_VERSION:-\"$ios_destination_version\"}
+IOS_DESTINATION_SIMULATOR_NAME=\${IOS_DESTINATION_SIMULATOR_NAME:-\"$ios_destination_simulator_name\"}
+OSX_DESTINATION_ARCH=\${OSX_DESTINATION_ARCH:-\"$osx_destination_arch\"}" > "$1/script/.env"
 
     if [ "$use_ssh" == "y" ]
     then
@@ -130,16 +116,6 @@ XCODE_PROJECT=$xcode_project_file" > "$1/script/.env"
     if [ "$install_githooks" == "y" ]
     then
       echo "INSTALL_GITHOOKS=true" >> "$1/script/.env"
-    fi
-
-    if [ -n "$ios_destination_default" ]
-    then
-      echo "IOS_DESTINATION=$ios_destination_default" >> "$1/script/.env"
-    fi
-
-    if [ -n "$osx_destination_default" ]
-    then
-      echo "OSX_DESTINATION=$osx_destination_default" >> "$1/script/.env"
     fi
 
     echo " → '$1/script/.env' successfully generated"

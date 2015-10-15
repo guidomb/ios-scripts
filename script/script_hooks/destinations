@@ -1,7 +1,12 @@
 #!/bin/bash
 
-if [ -n "$IOS_OS_VERSION" ] && [ -n "$IOS_SIMULATOR_NAME" ]; then
-  IOS_DESTINATION="'platform=iOS Simulator,name=$IOS_SIMULATOR_NAME,OS=$IOS_OS_VERSION'"
+IOS_DESTINATION="'platform=iOS Simulator,name=$IOS_DESTINATION_SIMULATOR_NAME,OS=$IOS_DESTINATION_VERSION'"
+
+if [ -z "$OSX_DESTINATION_ARCH" ]
+then
+  OSX_DESTINATION="'platform=OS X,arch=$OSX_DESTINATION_ARCH'"
+else
+  OSX_DESTINATION="'platform=OS X'"
 fi
 
 scheme_destination ()
