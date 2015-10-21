@@ -47,6 +47,14 @@ If you use Carthage you can specify the required carthage version by your projec
 
 All build script will check if the Carthage version matches the required version. If that is not the case the scripts will fail.
 
+#### Code signing certificates
+
+Because Carthage builds all the dependencies and generates a fat `.framework` with binaries for all the possible architectures (iWatch, iPhone, simulator). It needs to sign the artifacts using a code signing certificate. Code signing is not necessary if the dependency is properly configured not to code sign for
+simulator architectures. But some dependency are not properly configured and you
+will need to code sign even for simulator architectures.
+
+In such case you need to provide a `.p12` file with a development certificate and store them in `script/certificates/cibot.p12`. You will also need to provide the passphrase for the certificate in the environmental variable `KEY_PASSWORD`.
+
 ### Project configuration
 
 All the scripts are smart enough to detect if you are using Carthage or Cocoapods and tune their behavior to use the workflow that best suites the underlaying dependency management tool.
@@ -70,9 +78,9 @@ Or you can override this by defining the variable `SCHEME` like this
 SCHEME=MyScheme ./script/cibuild
 ```
 
-#### xcodebuild `-destination` parameter 
+#### xcodebuild `-destination` parameter
 
-In order to run your test, `xcodebuild` needs an extra parameter to specify where. 
+In order to run your test, `xcodebuild` needs an extra parameter to specify where.
 The scripts pick the correct destination using the scheme name using the following pattern (case insensitive)
 
 * `*-iOS`: for iOS
@@ -84,13 +92,13 @@ These are the default values for each platform
 * iOS: `'platform=iOS Simulator,name=iPhone 6,OS=latest'`
 * OSX: `'platform=OS X'`
 
-For iOS you can change the name of the simulator or the OS version it should emulate. 
+For iOS you can change the name of the simulator or the OS version it should emulate.
 To use a different emulator just define the variable `IOS_DESTINATION_SIMULATOR_NAME` with the name of the simulator to use
 
 ```bash
 IOS_DESTINATION_SIMULATOR_NAME="iPhone 6s Plus" script/cibuild
 ```
-> For all possible names, just run `xcrun simctl list devicetypes` 
+> For all possible names, just run `xcrun simctl list devicetypes`
 
 To use a different OS just define the variable `IOS_DESTINATION_VERSION` with the OS version to use
 
