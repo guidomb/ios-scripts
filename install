@@ -64,7 +64,7 @@ generate_env_file ()
       read use_submodules
 
       echo ""
-      echo "What platforms should Carthage build as a comma separated list? [iOS]"
+      echo "What platforms should Carthage build? Enter as a comma separated list [iOS]"
       read carthage_platforms
     fi
 
