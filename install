@@ -94,7 +94,7 @@ generate_env_file ()
 
     if [ -z "$required_carthage_version" ]
     then
-      required_carthage_version="0.9.2"
+      required_carthage_version="0.9.3"
     fi
 
     ios_destination_version=${ios_destination_version:-"latest"}
