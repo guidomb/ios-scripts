@@ -55,6 +55,14 @@ will need to code sign even for simulator architectures.
 
 In such case you need to provide a `.p12` file with a development certificate and store them in `script/certificates/cibot.p12`. You will also need to provide the passphrase for the certificate in the environmental variable `KEY_PASSWORD`.
 
+#### GitHub API rate limit
+
+If you are using Carthage in a machine with a shared public IP, like in Travis CI, you are sharing
+the GitHub rate limit quota with the rest of the clients. Because Carthage uses the GitHub API
+this could be a problem. That is why is recommended in such environments to use your own access token.
+
+To tell Carthage to use your own access token and in order for the bootstrap script to install the custom version of Carthage you need to define the environmental variable `GITHUB_ACCESS_TOKEN`.
+
 ### Project configuration
 
 All the scripts are smart enough to detect if you are using Carthage or Cocoapods and tune their behavior to use the workflow that best suites the underlaying dependency management tool.
@@ -189,19 +197,6 @@ Updates the project's dependencies using the underlaying dependency management m
 ### script/cibuild
 
 This script must be run in the CI environment. It bootstraps the project, builds it and run the test.
-
-#### Carthage issues
-
-Thee are some limitation when using Carthage as the dependency management tool in services like
-Travis CI.
-
-##### GitHub API rate limit
-
-If you are using Carthage in a machine with a shared public IP, like in Travis CI, you are sharing
-the GitHub rate limit quota with the rest of the clients. Because Carthage uses the GitHub API
-this could be a problem. That is why is recommended in such environments to use your own access token.
-
-To tell Carthage to use your own access token and in order for the bootstrap script to install the custom version of Carthage you need to define the environmental variable `GITHUB_ACCESS_TOKEN`.
 
 ### General configuration variables
 
