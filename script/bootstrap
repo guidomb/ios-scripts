@@ -126,6 +126,12 @@ bootstrap_carthage ()
   then
     carthage_cmd="$carthage_cmd --use-submodules --no-build"
   fi
+
+  if [ "$CARTHAGE_NO_USE_BINARIES" == "true" ]
+  then
+    carthage_cmd="$carthage_cmd --no-use-binaries"
+  fi
+
   eval $carthage_cmd
 }
 

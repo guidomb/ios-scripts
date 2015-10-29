@@ -103,6 +103,7 @@ generate_env_file ()
     echo "
 REQUIRED_CARTHAGE_VERSION=$required_carthage_version
 CARTHAGE_BUILD_PLATFORM=\${CARTHAGE_BUILD_PLATFORM:-\"$carthage_platforms\"}
+CARTHAGE_NO_USE_BINARIES=\${CARTHAGE_NO_USE_BINARIES:-\"false\"}
 PROJECT_NAME=$project_name
 XCODE_WORKSPACE=$xcode_workspace_file
 XCODE_PROJECT=$xcode_project_file
