@@ -4,6 +4,8 @@
 
 set -e
 
+DEFAULT_CARTHAGE_VERSION="0.9.4"
+
 generate_env_file ()
 {
   echo ""
@@ -52,7 +54,7 @@ generate_env_file ()
     if [ -f $1/Cartfile ] || [ -f $1/Cartfile.private ]
     then
       echo ""
-      echo "What version of Carthage should we use? [0.9.2]"
+      echo "What version of Carthage should we use? [$DEFAULT_CARTHAGE_VERSION]"
       read required_carthage_version
 
       echo ""
@@ -94,7 +96,7 @@ generate_env_file ()
 
     if [ -z "$required_carthage_version" ]
     then
-      required_carthage_version="0.9.3"
+      required_carthage_version="$DEFAULT_CARTHAGE_VERSION"
     fi
 
     ios_destination_version=${ios_destination_version:-"latest"}
