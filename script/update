@@ -17,6 +17,14 @@ then
   then
     carthage_cmd="$carthage_cmd --use-submodules --no-build"
   fi
+  if [ "$CARTHAGE_NO_USE_BINARIES" == "true" ]
+  then
+    carthage_cmd="$carthage_cmd --no-use-binaries"
+  fi
+  if [ ! -z "$VERBOSE" ]
+  then
+    echo $carthage_cmd
+  fi
   eval $carthage_cmd
 elif [ -f Podfile ]
 then
