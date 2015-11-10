@@ -133,7 +133,7 @@ bootstrap_carthage ()
     carthage_cmd="$carthage_cmd --no-use-binaries"
   fi
 
-  if [ -z $DISABLE_CARTHAGE_CACHE ] && type bundle > /dev/null && bundle show carthage_cache > /dev/null && [ -f .carthage_cache.yml ]
+  if [ -z $DISABLE_CARTHAGE_CACHE ] && type bundle > /dev/null && bundle show carthage_cache > /dev/null && ([ ! -z $DISABLE_CARTHAGE_CACHE_CONFIG ] || [ -f .carthage_cache.yml ])
   then
     carthage_cmd="(bundle exec carthage_cache install || $carthage_cmd) && bundle exec carthage_cache publish"
   fi
