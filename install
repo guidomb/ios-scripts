@@ -4,7 +4,7 @@
 
 set -e
 
-DEFAULT_CARTHAGE_VERSION="0.9.4"
+DEFAULT_CARTHAGE_VERSION="0.10"
 
 generate_env_file ()
 {
