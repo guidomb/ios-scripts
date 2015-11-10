@@ -202,7 +202,7 @@ install_carthage ()
     force_install_carthage
   fi
 
-  if type bundle > /dev/null && bundle show carthage_cache > /dev/null && [ ! -f .carthage_cache.yml ]
+  if [ -z "$DISABLE_CARTHAGE_CACHE_CONFIG" ] && type bundle > /dev/null && bundle show carthage_cache > /dev/null && [ ! -f .carthage_cache.yml ]
   then
     bundle exec carthage_cache config
   fi
