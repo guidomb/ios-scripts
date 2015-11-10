@@ -47,6 +47,17 @@ If you use Carthage you can specify the required carthage version by your projec
 
 All build script will check if the Carthage version matches the required version. If that is not the case the scripts will fail.
 
+#### Carthage cache
+
+If [CarthageCache](https://github.com/guidomb/carthage_cache) is installed
+using Bundler, then the bootstrap and update script will try to use the cache. You can disable carthage cache for a specific run by setting the
+`DISABLE_CARTHAGE_CACHE` environmental variable.
+
+The bootstrap script will also try to generate the `.carthage_cache.yml`
+if it doesn't exist. Keep in mind that `.carthage_cache.yml` should be
+git ignored. You can avoid generating the configuration file by setting
+the `DISABLE_CARTHAGE_CACHE_CONFIG` environmental variable.
+
 #### Code signing certificates
 
 Because Carthage builds all the dependencies and generates a fat `.framework` with binaries for all the possible architectures (iWatch, iPhone, simulator). It needs to sign the artifacts using a code signing certificate. Code signing is not necessary if the dependency is properly configured not to code sign for
