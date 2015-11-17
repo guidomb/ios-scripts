@@ -58,6 +58,12 @@ if it doesn't exist. Keep in mind that `.carthage_cache.yml` should be
 git ignored. You can avoid generating the configuration file by setting
 the `DISABLE_CARTHAGE_CACHE_CONFIG` environmental variable.
 
+In a CI environment, like Travis CI, it is recommended to configure
+carthage cache using environmental variables. If you want to change the
+bucket name you can set the `CARTHAGE_CACHE_BUCKET_NAME` variable. Which
+will pass the value of that variable to carthage cache's `--bucket-name`
+flag.
+
 #### Code signing certificates
 
 Because Carthage builds all the dependencies and generates a fat `.framework` with binaries for all the possible architectures (iWatch, iPhone, simulator). It needs to sign the artifacts using a code signing certificate. Code signing is not necessary if the dependency is properly configured not to code sign for
