@@ -154,6 +154,9 @@ several time to add or test new functionality.
 
 In case you need to install more dependencies or execute some configuration script, the appropriate way to do this is by adding a bootstrap hook. If you create an executable script in `script/script_hooks/bootstrap` that script will be called during the bootstrap process.
 
+You can disable bootstrap hooks by defining `DISABLE_BOOTSTRAP_HOOKS`
+environmental variable.
+
 #### Build configuration for Travis CI
 
 If you are using Travis CI to build and test your project you only need to tell travis to

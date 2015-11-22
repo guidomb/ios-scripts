@@ -187,7 +187,7 @@ install_dependencies ()
   install_homebrew
   brew_install "xcode-coveralls" "macmade/tap"
 
-  if [ -f script/script_hooks/bootstrap ]
+  if [ -f script/script_hooks/bootstrap ] && [ -z $DISABLE_BOOTSTRAP_HOOKS ]
   then
     script/script_hooks/bootstrap
   fi
