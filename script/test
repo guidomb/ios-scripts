@@ -62,14 +62,14 @@ do
   run_tests $scheme
 done
 
-if [ -f "$PROJECT_NAME.podspec" ]
+if [ -f "$PROJECT_NAME.podspec" ] && [ "$LINT_PODSPEC" == "yes"]
 then
   echo ""
   echo " → Linting $PROJECT_NAME.podspec"
   echo ""
   if type bundle > /dev/null && bundle show pod > /dev/null
   then
-    bundle exec pod lib lint
+    bundle exec pod lib lint $LINT_PODSPEC_PARAMETERS
   elif type pod > /dev/null
   then
     pod lib lint
