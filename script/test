@@ -72,6 +72,6 @@ then
     bundle exec pod lib lint $LINT_PODSPEC_PARAMETERS
   elif type pod > /dev/null
   then
-    pod lib lint
+    pod lib lint $LINT_PODSPEC_PARAMETERS
   fi
 fi
