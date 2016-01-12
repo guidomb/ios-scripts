@@ -213,6 +213,21 @@ install_carthage ()
   fi
 }
 
+install_swiftlint ()
+{
+  source script/common/swiftlint
+
+  if type swiftlint > /dev/null
+  then
+    echo ""
+    echo " → Checking installed version of swiftlint"
+    echo ""
+    check_swiftlint_version
+  else
+    force_install_swiftlint
+  fi
+}
+
 main ()
 {
   source script/.env
@@ -233,6 +248,11 @@ main ()
   then
     install_carthage
     bootstrap_carthage
+  fi
+
+  if [ -f .swiftlint.yml ]
+  then
+    install_swiftlint
   fi
 
   if [ -f Podfile ]

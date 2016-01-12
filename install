@@ -5,6 +5,7 @@
 set -e
 
 DEFAULT_CARTHAGE_VERSION="0.10"
+DEFAULT_SWIFTLINT_VERSION="0.6.0"
 
 generate_env_file ()
 {
@@ -49,6 +50,13 @@ generate_env_file ()
     if [ "$install_githooks" != "n" ]
     then
       install_githooks="y"
+    fi
+
+    if [ -f $1/.swiftlint.yml ]
+    then
+      echo ""
+      echo "What version of swiftlint should we use? [$DEFAULT_SWIFTLINT_VERSION]"
+      read required_swiftlint_version
     fi
 
     if [ -f $1/Cartfile ] || [ -f $1/Cartfile.private ]
@@ -103,6 +111,7 @@ generate_env_file ()
     ios_destination_simulator_name=${ios_destination_simulator_name:-"iPhone 6"}
     carthage_platforms=${carthage_platforms:-"iOS"}
     echo "
+REQUIRED_SWIFTLINT_VERSION=$required_swiftlint_version
 REQUIRED_CARTHAGE_VERSION=$required_carthage_version
 CARTHAGE_BUILD_PLATFORM=\${CARTHAGE_BUILD_PLATFORM:-\"$carthage_platforms\"}
 CARTHAGE_NO_USE_BINARIES=\${CARTHAGE_NO_USE_BINARIES:-\"false\"}

@@ -6,6 +6,7 @@ source script/.env
 source script/script_hooks/schemes
 source script/script_hooks/destinations
 source script/common/carthage
+source script/common/swiftlint
 
 run_tests ()
 {
@@ -47,6 +48,12 @@ run_tests ()
 if [ -f Cartfile.resolved ]
 then
   check_carthage_version
+fi
+
+if [ -f .swiftlint.yml ] && [ -z $DISABLE_SWIFTLINT ]
+then
+  check_swiftlint_version
+  swiftlint
 fi
 
 current_schemes=$(schemes)
