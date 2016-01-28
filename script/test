@@ -53,7 +53,7 @@ fi
 if [ -f .swiftlint.yml ] && [ -z $DISABLE_SWIFTLINT ]
 then
   check_swiftlint_version
-  swiftlint
+  swiftlint > .swiftlint-report.json
 fi
 
 current_schemes=$(schemes)
