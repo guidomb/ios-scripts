@@ -32,26 +32,34 @@ check_carthage_version ()
   local patch_number=`echo $REQUIRED_CARTHAGE_VERSION | cut -d "." -f 3`
   if [ -z $patch_number ]
   then
-    REQUIRED_CARTHAGE_VERSION="$REQUIRED_CARTHAGE_VERSION.0"
+    COMPARE_CARTHAGE_VERSION="$REQUIRED_CARTHAGE_VERSION.0"
+  else
+    COMPARE_CARTHAGE_VERSION="$REQUIRED_CARTHAGE_VERSION"
   fi
-  if [ "$carthage_installed_version" != "$REQUIRED_CARTHAGE_VERSION" ]
+  if [ "$carthage_installed_version" != "$COMPARE_CARTHAGE_VERSION" ]
   then
-    printf "\033[1;31mError: carthage version '$carthage_installed_version' is not equal to '$REQUIRED_CARTHAGE_VERSION'"
+    printf "\033[1;31mError: carthage version '$carthage_installed_version' is not equal to '$COMPARE_CARTHAGE_VERSION'"
     printf "\033[0m"
     if [ ! -z "$NO_CARTHAGE_UPDATE" ]
     then
       exit 1
     else
-      echo ""
-      echo ""
-      echo "Would you like to update carthage to version '$REQUIRED_CARTHAGE_VERSION'? [N/y]"
-      read update_carthage
-      if [ "$update_carthage" == "y" ]
+      if [ ! -z "$FORCE_CARTHAGE_VERSION" ]
       then
         uninstall_carthage
         force_install_carthage
       else
-        exit 1
+        echo ""
+        echo ""
+        echo "Would you like to update carthage to version '$REQUIRED_CARTHAGE_VERSION'? [N/y]"
+        read update_carthage
+        if [ "$update_carthage" == "y" ]
+        then
+          uninstall_carthage
+          force_install_carthage
+        else
+          exit 1
+        fi
       fi
     fi
   fi
