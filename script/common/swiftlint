@@ -32,11 +32,13 @@ check_swiftlint_version ()
   local patch_number=`echo $REQUIRED_SWIFTLINT_VERSION | cut -d "." -f 3`
   if [ -z $patch_number ]
   then
-    REQUIRED_SWIFTLINT_VERSION="$REQUIRED_SWIFTLINT_VERSION.0"
+    COMPARE_SWIFTLINT_VERSION="$REQUIRED_SWIFTLINT_VERSION.0"
+  else
+    COMPARE_SWIFTLINT_VERSION="$REQUIRED_SWIFTLINT_VERSION"
   fi
-  if [ "$swiftlint_installed_version" != "$REQUIRED_SWIFTLINT_VERSION" ]
+  if [ "$swiftlint_installed_version" != "$COMPARE_SWIFTLINT_VERSION" ]
   then
-    printf "\033[1;31mError: swiftlint version '$swiftlint_installed_version' is not equal to '$REQUIRED_SWIFTLINT_VERSION'"
+    printf "\033[1;31mError: swiftlint version '$swiftlint_installed_version' is not equal to '$COMPARE_SWIFTLINT_VERSION'"
     printf "\033[0m"
     if [ ! -z "$NO_SWIFTLINT_UPDATE" ]
     then
