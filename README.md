@@ -47,6 +47,12 @@ If you use Carthage you can specify the required carthage version by your projec
 
 All build script will check if the Carthage version matches the required version. If that is not the case the scripts will fail.
 
+When running `script/bootstrap` you can force the script to install the desired version of Carthage (pointed by `REQUIRED_CARTHAGE_VERSION`) using the environmental variable `FORCE_CARTHAGE_VERSION` or not updating Carthage
+(and fail) if the installed version does not match the desired one by using
+`NO_CARTHAGE_UPDATE`.
+
+If you are running on Travis CI (or any other CI services that already has Carthage installed) you probably want to use `FORCE_CARTHAGE_VERSION`.
+
 #### Carthage cache
 
 If [CarthageCache](https://github.com/guidomb/carthage_cache) is installed
@@ -164,8 +170,11 @@ execute `script/cibuild`
 
 ```yaml
 language: objective-c
-osx_image: xcode6.4
-script: script/cibuild
+osx_image: xcode7.2.1
+before_install:
+- gem install bundler
+script:
+- FORCE_CARTHAGE_VERSION=true script/cibuild
 branches:
   only:
   - master
