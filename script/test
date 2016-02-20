@@ -53,7 +53,12 @@ fi
 if [ -f .swiftlint.yml ] && [ -z $DISABLE_SWIFTLINT ]
 then
   check_swiftlint_version
-  swiftlint > .swiftlint-report.json
+  swiftlint --reporter json > .swiftlint-report.json
+fi
+
+if type bundle > /dev/null && bundle show linterbot > /dev/null && [ "$TRAVIS_PULL_REQUEST" != "false" ]
+then
+  bundle exec linterbot $TRAVIS_REPO_SLUG $TRAVIS_PULL_REQUEST < .swiftlint-report.json
 fi
 
 current_schemes=$(schemes)
