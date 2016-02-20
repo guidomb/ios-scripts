@@ -170,7 +170,7 @@ execute `script/cibuild`
 
 ```yaml
 language: objective-c
-osx_image: xcode7.2.1
+osx_image: xcode7.2
 before_install:
 - gem install bundler
 script:
