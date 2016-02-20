@@ -188,23 +188,6 @@ travis encrypt KEY_PASSWORD=dev-certificate-passphrase --add env.global
 travis encrypt COVERALLS_TOKEN=coveralls-repo-token --add env.global
 ```
 
-#### Build configuration for Circle CI
-
-If you are using Circle CI to build and test your project you only need to tell Circle to
-execute `script/cibuild`
-
-```yaml
-machine:
-  xcode:
-    version: "6.3.1"
-test:
-  override:
-    - script/cibuild
-```
-
-Remember to export the required environmental variables in the project's setting from the Circle CI web tool.
-
-
 ### script/build
 
 The build script just builds the project

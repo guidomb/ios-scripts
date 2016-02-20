@@ -22,19 +22,6 @@ run_tests ()
   destination=$(scheme_destination $1)
   test_command="$test_command -destination $destination clean build test -configuration Debug"
 
-  if [ ! -z "$CIRCLE_ARTIFACTS" ]
-  then
-    test_command="$test_command | tee $CIRCLE_ARTIFACTS/xcode_raw.log"
-  fi
-  if type bundle > /dev/null && bundle show xcpretty > /dev/null
-  then
-    test_command="$test_command | bundle exec xcpretty -c"
-    if [ ! -z "$CIRCLE_TEST_REPORTS" ]
-    then
-      test_command="$test_command --report junit --output $CIRCLE_TEST_REPORTS/xcode/results.xml"
-    fi
-  fi
-
   echo ""
   echo " → Running tests for scheme '$1'"
   echo ""
