@@ -184,9 +184,6 @@ install_dependencies ()
   echo ""
   echo " → Installing dependencies"
   echo ""
-  install_homebrew
-  brew_install "xcode-coveralls" "macmade/tap"
-
   if [ -f script/script_hooks/bootstrap ] && [ -z $DISABLE_BOOTSTRAP_HOOKS ]
   then
     script/script_hooks/bootstrap
