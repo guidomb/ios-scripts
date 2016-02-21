@@ -21,6 +21,10 @@ run_tests ()
 
   destination=$(scheme_destination $1)
   test_command="$test_command -destination $destination clean build test -configuration Debug"
+  if type bundle > /dev/null && bundle show xcpretty > /dev/null
+  then
+    test_command="$test_command | bundle exec xcpretty -c"
+  fi
 
   echo ""
   echo " → Running tests for scheme '$1'"
