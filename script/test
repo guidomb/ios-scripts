@@ -43,7 +43,7 @@ then
   echo " → Running swiftlint"
   echo ""
   check_swiftlint_version
-  if type bundle > /dev/null && bundle show linterbot > /dev/null && [ "$PULL_REQUEST" != "false" ]
+  if [ ! -z "$RUNNING_IN_CI" ] && type bundle > /dev/null && bundle show linterbot > /dev/null && [ "$PULL_REQUEST" != "false" ]
   then
     echo ""
     echo " → Running linterbot"
@@ -51,7 +51,7 @@ then
     # || true avoid a the script to fail if the linter
     # does not returns successfully, which could happen
     # in case of severe lint errors
-    swiftlint linter --reporter json > .swiftlint-report.json || true
+    swiftlint lint --reporter json > .swiftlint-report.json || true
     bundle exec linterbot $REPO_SLUG $PULL_REQUEST < .swiftlint-report.json
   else
     swiftlint
