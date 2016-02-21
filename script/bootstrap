@@ -231,6 +231,5 @@ main ()
 
 export -f init_submodules
 export -f echo_submodule_name
-export -f brew_install
 
 main
