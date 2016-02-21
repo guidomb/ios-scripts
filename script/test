@@ -47,7 +47,7 @@ then
   echo " → Running swiftlint"
   echo ""
   check_swiftlint_version
-  if [ ! -z "$RUNNING_IN_CI" ] && type bundle > /dev/null && bundle show linterbot > /dev/null && [ "$PULL_REQUEST" != "false" ]
+  if [ ! -z "$RUNNING_ON_CI" ] && type bundle > /dev/null && bundle show linterbot > /dev/null && [ "$PULL_REQUEST" != "false" ]
   then
     echo ""
     echo " → Running linterbot"
