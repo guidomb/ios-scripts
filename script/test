@@ -51,7 +51,7 @@ then
     # || true avoid a the script to fail if the linter
     # does not returns successfully, which could happen
     # in case of severe lint errors
-    swiftlint --reporter json > .swiftlint-report.json || true
+    swiftlint linter --reporter json > .swiftlint-report.json || true
     bundle exec linterbot $TRAVIS_REPO_SLUG $TRAVIS_PULL_REQUEST < .swiftlint-report.json
   else
     swiftlint
