@@ -163,6 +163,9 @@ In case you need to install more dependencies or execute some configuration scri
 You can disable bootstrap hooks by defining `DISABLE_BOOTSTRAP_HOOKS`
 environmental variable.
 
+If your hooks need to know if they are running on CI they can check if the
+environmental `$RUNNING_ON_CI` is defined.
+
 #### Build configuration for Travis CI
 
 If you are using Travis CI to build and test your project you only need to tell travis to
@@ -174,7 +177,7 @@ osx_image: xcode7.2
 before_install:
 - gem install bundler
 script:
-- FORCE_CARTHAGE_VERSION=true script/cibuild
+- REPO_SLUG="$TRAVIS_REPO_SLUG" PULL_REQUEST="$TRAVIS_PULL_REQUEST" FORCE_CARTHAGE_VERSION=true script/cibuild
 branches:
   only:
   - master
@@ -194,7 +197,12 @@ The build script just builds the project
 
 ### script/test
 
-The test script builds and run the tests. If the project has a `.podspec` file is runs the cocoapod linter.
+The test script builds and run the tests.
+
+  * If the project has a `.swiftlint.yml` file the the [Swift linter](https://github.com/realm/SwiftLint) is run.
+  * If the project uses [linterbot](https://github.com/guidomb/linterbot), the `script/test` is run on CI for a pull request and `swiftlint` is avaliable then the `linterbot` will be executed.
+  `swiftlint` has been run then t
+  * If the project has a `.podspec` file the Cocoapods podspec linter is run.
 
 ### script/coverage
 
@@ -209,6 +217,35 @@ Updates the project's dependencies using the underlaying dependency management m
 ### script/cibuild
 
 This script must be run in the CI environment. It bootstraps the project, builds it and run the test.
+
+#### Configure SwiftLint run script for CI
+
+If your project is using [SwiftLint](https://github.com/realm/SwiftLint) it is recommended to configure the run script as follow instead of how it is explained in the SwiftLint docs.
+
+```bash
+if [ ! -z "$RUNNING_ON_CI" ]
+then
+    echo "SwiftLint run script has been disabled"
+    exit 0
+fi
+
+if which swiftlint >/dev/null; then
+    swiftlint
+else
+    echo "warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint"
+fi
+```
+
+This allows disabling the run script when running on CI and running the linter twice.
+
+#### Configure linterbot for CI
+
+If your project is using [SwiftLint](https://github.com/realm/SwiftLint) and [linterbot](https://github.com/guidomb/linterbot) then you need to add the following environmental variables when running `script/cibuild`:
+
+  * `REPO_SLUG`: The GitHub repository slug, like `guidomb/ios-scripts`.
+  * `PULL_REQUEST`: The pull request number to be analyzed if the current build was triggered by a pull request or `false` otherwise.
+
+Keep in mind that the linterbot also uses the enviromental variable `GITHUB_ACCESS_TOKEN` (which is also used by Carthage). The GitHub user associated with that token should have write access to the repository and is the user that will be used to comment on every linter validation in the pull request.
 
 ### General configuration variables
 
