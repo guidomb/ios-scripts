@@ -39,13 +39,23 @@ fi
 
 if [ -f .swiftlint.yml ] && [ -z $DISABLE_SWIFTLINT ]
 then
+  echo ""
+  echo " → Running swiftlint"
+  echo ""
   check_swiftlint_version
-  swiftlint --reporter json > .swiftlint-report.json
-fi
-
-if type bundle > /dev/null && bundle show linterbot > /dev/null && [ "$TRAVIS_PULL_REQUEST" != "false" ]
-then
-  bundle exec linterbot $TRAVIS_REPO_SLUG $TRAVIS_PULL_REQUEST < .swiftlint-report.json
+  if type bundle > /dev/null && bundle show linterbot > /dev/null && [ "$TRAVIS_PULL_REQUEST" != "false" ]
+  then
+    echo ""
+    echo " → Running linterbot"
+    echo ""
+    # || true avoid a the script to fail if the linter
+    # does not returns successfully, which could happen
+    # in case of severe lint errors
+    swiftlint --reporter json > .swiftlint-report.json || true
+    bundle exec linterbot $TRAVIS_REPO_SLUG $TRAVIS_PULL_REQUEST < .swiftlint-report.json
+  else
+    swiftlint
+  fi
 fi
 
 current_schemes=$(schemes)
