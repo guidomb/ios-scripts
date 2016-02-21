@@ -43,7 +43,7 @@ then
   echo " → Running swiftlint"
   echo ""
   check_swiftlint_version
-  if type bundle > /dev/null && bundle show linterbot > /dev/null && [ "$TRAVIS_PULL_REQUEST" != "false" ]
+  if type bundle > /dev/null && bundle show linterbot > /dev/null && [ "$PULL_REQUEST" != "false" ]
   then
     echo ""
     echo " → Running linterbot"
@@ -52,7 +52,7 @@ then
     # does not returns successfully, which could happen
     # in case of severe lint errors
     swiftlint linter --reporter json > .swiftlint-report.json || true
-    bundle exec linterbot $TRAVIS_REPO_SLUG $TRAVIS_PULL_REQUEST < .swiftlint-report.json
+    bundle exec linterbot $REPO_SLUG $PULL_REQUEST < .swiftlint-report.json
   else
     swiftlint
   fi
