@@ -201,7 +201,6 @@ The test script builds and run the tests.
 
   * If the project has a `.swiftlint.yml` file the the [Swift linter](https://github.com/realm/SwiftLint) is run.
   * If the project uses [linterbot](https://github.com/guidomb/linterbot), the `script/test` is run on CI for a pull request and `swiftlint` is avaliable then the `linterbot` will be executed.
-  `swiftlint` has been run then t
   * If the project has a `.podspec` file the Cocoapods podspec linter is run.
 
 ### script/coverage
@@ -250,6 +249,13 @@ Keep in mind that the linterbot also uses the enviromental variable `GITHUB_ACCE
 ### General configuration variables
 
  * `VERBOSE` if you set the `VERBOSE` environmental with a value the scripts will print more information.
+
+### Common utility scripts
+
+Common utility scripts or sets of functions that are useful but are not tied to a particular build script are available in `script/common`.
+
+  * `script/common/install_carthage`: Allows to install a specific version of Carthage.
+  * `script/common/install_swiftlint`: Allows to install a specific version of SwiftLint.
 
 ## License
 
