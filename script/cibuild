@@ -12,9 +12,24 @@ KEYCHAIN=ios-build.keychain
 ##
 ## Build Process
 ##
+check_if_pr_only_adds_markdown_files()
+{
+  if [ "$PULL_REQUEST" == "false" ]
+  then
+    echo "false"
+  else
+    echo `curl -v -H "Authorization: token $GITHUB_ACCESS_TOKEN" "https://api.github.com/repos/$REPO_SLUG/pulls/$PULL_REQUEST/files" | ruby -e "require 'json'; puts JSON.parse(STDIN.read).all? { |file| file['filename'].end_with?('.md') }"`
+  fi
+}
 
 main ()
 {
+    if [ "$(check_if_pr_only_adds_markdown_files)" == "true" ]
+    then
+      echo "Skipping build because this pull request only adds / modifies markdown files."
+      exit 0
+    fi
+
     if [ -f Cartfile.resolved ] && [ -f "$SCRIPT_DIR/certificates/cibot.p12" ]
     then
       echo ""
