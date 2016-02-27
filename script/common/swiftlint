@@ -29,6 +29,7 @@ uninstall_swiftlint ()
 check_swiftlint_version ()
 {
   local swiftlint_installed_version=`swiftlint version`
+
   local patch_number=`echo $REQUIRED_SWIFTLINT_VERSION | cut -d "." -f 3`
   if [ -z $patch_number ]
   then
@@ -36,6 +37,13 @@ check_swiftlint_version ()
   else
     COMPARE_SWIFTLINT_VERSION="$REQUIRED_SWIFTLINT_VERSION"
   fi
+
+  local patch_number=`echo $swiftlint_installed_version | cut -d "." -f 3`
+  if [ -z $patch_number ]
+  then
+    COMPARE_SWIFTLINT_VERSION="$swiftlint_installed_version.0"
+  fi
+
   if [ "$swiftlint_installed_version" != "$COMPARE_SWIFTLINT_VERSION" ]
   then
     printf "\033[1;31mError: swiftlint version '$swiftlint_installed_version' is not equal to '$COMPARE_SWIFTLINT_VERSION'"

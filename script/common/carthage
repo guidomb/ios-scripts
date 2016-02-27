@@ -29,6 +29,7 @@ uninstall_carthage ()
 check_carthage_version ()
 {
   local carthage_installed_version=`carthage version`
+
   local patch_number=`echo $REQUIRED_CARTHAGE_VERSION | cut -d "." -f 3`
   if [ -z $patch_number ]
   then
@@ -36,6 +37,13 @@ check_carthage_version ()
   else
     COMPARE_CARTHAGE_VERSION="$REQUIRED_CARTHAGE_VERSION"
   fi
+
+  local patch_number=`echo $carthage_installed_version | cut -d "." -f 3`
+  if [ -z $patch_number ]
+  then
+    carthage_installed_version="$carthage_installed_version.0"
+  fi
+
   if [ "$carthage_installed_version" != "$COMPARE_CARTHAGE_VERSION" ]
   then
     printf "\033[1;31mError: carthage version '$carthage_installed_version' is not equal to '$COMPARE_CARTHAGE_VERSION'"
