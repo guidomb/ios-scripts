@@ -24,6 +24,10 @@ run_tests ()
   if type bundle > /dev/null && bundle show xcpretty > /dev/null
   then
     test_command="$test_command | bundle exec xcpretty -c"
+    if type bundle > /dev/null && bundle show xcpretty-travis-formatter > /dev/null
+    then
+      test_command="$test_command -f `xcpretty-travis-formatter`"
+    fi
   fi
 
   echo ""
