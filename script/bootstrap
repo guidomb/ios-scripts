@@ -60,40 +60,7 @@ bootstrap_carthage ()
   echo ""
   echo " → Bootstrapping Carthage"
   echo ""
-  carthage_cmd="carthage bootstrap --platform $CARTHAGE_BUILD_PLATFORM"
-
-  if [ "$USE_SSH" == "true" ]
-  then
-    carthage_cmd="$carthage_cmd --use-ssh"
-  fi
-
-  if [ "$USE_SUBMODULES" == "true" ]
-  then
-    carthage_cmd="$carthage_cmd --use-submodules --no-build"
-  fi
-
-  if [ "$CARTHAGE_NO_USE_BINARIES" == "true" ]
-  then
-    carthage_cmd="$carthage_cmd --no-use-binaries"
-  fi
-
-  if [ -z $DISABLE_CARTHAGE_CACHE ] && type bundle > /dev/null && bundle show carthage_cache > /dev/null && ([ ! -z $DISABLE_CARTHAGE_CACHE_CONFIG ] || [ -f .carthage_cache.yml ])
-  then
-    carthage_cache_cmd="carthage_cache"
-    if [ ! -z $CARTHAGE_CACHE_BUCKET_NAME ]
-    then
-      carthage_cache_cmd="$carthage_cache_cmd -b $CARTHAGE_CACHE_BUCKET_NAME"
-    fi
-    carthage_cmd="(bundle exec $carthage_cache_cmd install || $carthage_cmd) && bundle exec $carthage_cache_cmd publish"
-  fi
-
-  carthage_cmd="time $carthage_cmd"
-  if [ ! -z "$VERBOSE" ]
-  then
-    echo $carthage_cmd
-  fi
-
-  eval $carthage_cmd
+  call_carthage "bootstrap"
 }
 
 bootstrap_cocoapods ()
