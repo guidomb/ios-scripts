@@ -99,7 +99,11 @@ call_carthage()
     then
       carthage_cache_cmd="$carthage_cache_cmd -b $CARTHAGE_CACHE_BUCKET_NAME"
     fi
-    carthage_cmd="(bundle exec $carthage_cache_cmd install || $carthage_cmd) && bundle exec $carthage_cache_cmd publish"
+    carthage_cmd="(bundle exec $carthage_cache_cmd --verbose install || $carthage_cmd) && bundle exec $carthage_cache_cmd --verbose publish -p"
+    if [ -f ".carthage_cache_prune_white_list.yml" ]
+    then
+      carthage_cmd="$carthage_cmd -w .carthage_cache_prune_white_list.yml"
+    fi
   fi
 
   carthage_cmd="time $carthage_cmd"
