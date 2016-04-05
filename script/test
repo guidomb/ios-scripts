@@ -93,3 +93,8 @@ then
     pod lib lint $LINT_PODSPEC_PARAMETERS
   fi
 fi
+
+if [ -z "$RUNNING_ON_CI" ] && [ -f .slather.yml ]
+then
+  bundle exec slather coverage -s
+fi
