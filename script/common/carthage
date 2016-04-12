@@ -92,17 +92,31 @@ call_carthage()
     carthage_cmd="$carthage_cmd --no-use-binaries"
   fi
 
+  # Wraps cartahge command with carthage_cache command
   if [ -z $DISABLE_CARTHAGE_CACHE ] && type bundle > /dev/null && bundle show carthage_cache > /dev/null && ([ ! -z $DISABLE_CARTHAGE_CACHE_CONFIG ] || [ -f .carthage_cache.yml ])
   then
-    carthage_cache_cmd="carthage_cache"
+
+    # Builds basic carthage cache command invocation
+    carthage_cache_cmd="bundle exec carthage_cache --verbose"
     if [ ! -z $CARTHAGE_CACHE_BUCKET_NAME ]
     then
       carthage_cache_cmd="$carthage_cache_cmd -b $CARTHAGE_CACHE_BUCKET_NAME"
     fi
-    carthage_cmd="(bundle exec $carthage_cache_cmd --verbose install || $carthage_cmd) && bundle exec $carthage_cache_cmd --verbose publish -p"
-    if [ -f ".carthage_cache_prune_white_list.yml" ]
+
+    # Adds carthage cache install command if not disabled
+    if [ -z $DISABLE_CARTHAGE_CACHE_INSTALL ]
     then
-      carthage_cmd="$carthage_cmd -w .carthage_cache_prune_white_list.yml"
+      carthage_cmd="($carthage_cache_cmd install || $carthage_cmd)"
+    fi
+
+    # Adds carthage cache publish command if not disabled
+    if [ -z $DISABLE_CARTHAGE_CACHE_PUBLISH ]
+    then
+      carthage_cmd="$carthage_cmd && $carthage_cache_cmd publish -p"
+      if [ -f ".carthage_cache_prune_white_list.yml" ]
+      then
+        carthage_cmd="$carthage_cmd -w .carthage_cache_prune_white_list.yml"
+      fi
     fi
   fi
 
@@ -112,5 +126,12 @@ call_carthage()
     echo $carthage_cmd
   fi
 
-  eval $carthage_cmd
+  if [ -z $DRY_RUN ]
+  then
+    eval $carthage_cmd
+  else
+    echo ""
+    echo "WARN: Command was not executed because DRY_RUN enviromental was present."
+    echo ""
+  fi
 }
