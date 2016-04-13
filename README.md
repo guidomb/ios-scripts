@@ -217,6 +217,11 @@ Updates the project's dependencies using the underlaying dependency management m
 
 This script must be run in the CI environment. It bootstraps the project, builds it and run the test.
 
+## script/buildtime
+
+This script builds the project and prints the files by their build time sorted from the slowest to the fastest. It
+only prints that takes more than 9ms to build.
+
 #### Configure SwiftLint run script for CI
 
 If your project is using [SwiftLint](https://github.com/realm/SwiftLint) it is recommended to configure the run script as follow instead of how it is explained in the SwiftLint docs.
