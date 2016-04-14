@@ -3,6 +3,7 @@
 set -e
 
 source script/common/carthage
+source script/common/check_xcode_version
 
 build_using_carthage ()
 {
@@ -45,6 +46,7 @@ build_using_xcodebuild ()
   eval $build_command
 }
 
+check_xcode_version
 if [ ! -f $XCODE_WORKSPACE ] && [ -f Cartfile.resolved ] && type carthage > /dev/null
 then
   build_using_carthage

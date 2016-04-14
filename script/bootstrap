@@ -2,6 +2,8 @@
 
 set -e
 
+source script/common/check_xcode_version
+
 print_gem_install_cmd ()
 {
   regexp="gem ['\"]([a-zA-Z0-9_-]+)['\"](,.*)?"
@@ -144,6 +146,7 @@ main ()
   echo " Bootstrapping $PROJECT_NAME"
   echo ""
 
+  check_xcode_version
   install_git_hooks
   install_dependencies
 

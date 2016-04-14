@@ -7,6 +7,7 @@ source script/script_hooks/schemes
 source script/script_hooks/destinations
 source script/common/carthage
 source script/common/swiftlint
+source script/common/check_xcode_version
 
 run_tests ()
 {
@@ -40,6 +41,8 @@ run_tests ()
   fi
   eval $test_command
 }
+
+check_xcode_version
 
 if [ -f Cartfile.resolved ]
 then

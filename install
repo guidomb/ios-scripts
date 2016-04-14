@@ -6,6 +6,7 @@ set -e
 
 DEFAULT_CARTHAGE_VERSION="0.16.2"
 DEFAULT_SWIFTLINT_VERSION="0.9.2"
+DEFAULT_XCODE_VERSION="7.3"
 
 generate_env_file ()
 {
@@ -43,6 +44,10 @@ generate_env_file ()
         xcode_project_file="$project_name.xcodeproj"
       fi
     fi
+
+    echo ""
+    echo "What version of Xcode should we use? [$DEFAULT_XCODE_VERSION]"
+    read required_xcode_version
 
     echo ""
     echo "Do you want to install githooks when bootstrapping the project? [Y/n]"
@@ -111,6 +116,7 @@ generate_env_file ()
     ios_destination_simulator_name=${ios_destination_simulator_name:-"iPhone 6"}
     carthage_platforms=${carthage_platforms:-"iOS"}
     echo "
+REQUIRED_XCODE_VERSION=$required_xcode_version
 REQUIRED_SWIFTLINT_VERSION=$required_swiftlint_version
 REQUIRED_CARTHAGE_VERSION=$required_carthage_version
 CARTHAGE_BUILD_PLATFORM=\${CARTHAGE_BUILD_PLATFORM:-\"$carthage_platforms\"}
