@@ -3,6 +3,10 @@
 set -e
 
 source script/common/check_xcode_version
+if [ -f script/script_hooks/bootstrap ] && [ -z $DISABLE_BOOTSTRAP_HOOKS ]
+then
+  source script/script_hooks/bootstrap
+fi
 
 print_gem_install_cmd ()
 {
@@ -92,14 +96,25 @@ init_submodules ()
   git submodule foreach --quiet echo_submodule_name
 }
 
-install_dependencies ()
+before_install_hooks ()
 {
-  echo ""
-  echo " → Installing dependencies"
-  echo ""
-  if [ -f script/script_hooks/bootstrap ] && [ -z $DISABLE_BOOTSTRAP_HOOKS ]
+  if [ -f script/script_hooks/bootstrap ] && [ -z $DISABLE_BOOTSTRAP_HOOKS ] && type bootstrap_before_install_hooks > /dev/null
   then
-    script/script_hooks/bootstrap
+    echo ""
+    echo " → Running hooks before dependencies install"
+    echo ""
+    bootstrap_before_install_hooks
+  fi
+}
+
+after_install_hooks ()
+{
+  if [ -f script/script_hooks/bootstrap ] && [ -z $DISABLE_BOOTSTRAP_HOOKS ] && type bootstrap_after_install_hooks > /dev/null
+  then
+    echo ""
+    echo " → Running hooks after dependencies install"
+    echo ""
+    bootstrap_after_install_hooks
   fi
 }
 
@@ -148,7 +163,8 @@ main ()
 
   check_xcode_version
   install_git_hooks
-  install_dependencies
+
+  before_install_hooks
 
   if [ -f Gemfile ]
   then
@@ -175,6 +191,8 @@ main ()
   then
     init_submodules
   fi
+
+  after_install_hooks
 
   open_file_name=""
   if [ -z "$XCODE_WORKSPACE" ]
