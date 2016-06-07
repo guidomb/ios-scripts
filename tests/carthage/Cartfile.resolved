@@ -1,3 +1,3 @@
-github "Quick/Nimble" "v2.0.0"
-github "Quick/Quick" "v0.6.0"
-github "antitypical/Result" "eedca695397a094276ef869ab3cf8a8b2df2f55b"
+github "Quick/Nimble" "v4.0.1"
+github "Quick/Quick" "v0.9.2"
+github "antitypical/Result" "8b7a2ddb098fdae7e2c50b60b2d5cc22d91b0da5"
