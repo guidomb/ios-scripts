@@ -158,7 +158,22 @@ several time to add or test new functionality.
 
 #### Customize bootstrap process
 
-In case you need to install more dependencies or execute some configuration script, the appropriate way to do this is by adding a bootstrap hook. If you create an executable script in `script/script_hooks/bootstrap` that script will be called during the bootstrap process.
+In case you need to install more dependencies or execute some configuration script, the appropriate way to do this is by adding a bootstrap hook by creating a file `script/script_hooks/bootstrap` with the following functions
+
+```
+bootstrap_before_install_hooks ()
+{
+  # Code that will be executed before installing dependencies
+}
+
+bootstrap_before_install_hooks ()
+{
+  # Code that will be executed after installing dependencies
+}
+```
+
+For example if you need access to Ruby gems that are defined in your `Gemfile` then you should put your
+code inside the `bootstrap_before_install_hooks`.
 
 You can disable bootstrap hooks by defining `DISABLE_BOOTSTRAP_HOOKS`
 environmental variable.
