@@ -99,5 +99,10 @@ fi
 
 if [ -z "$RUNNING_ON_CI" ] && [ -f .slather.yml ]
 then
-  bundle exec slather coverage -s
+  slather_command="bundle exec slather coverage -s"
+  if [ ! -z "$VERBOSE" ]
+  then
+    slather_command="$slather_command --verbose"
+  fi
+  eval $slather_command
 fi
