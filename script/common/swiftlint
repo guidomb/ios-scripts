@@ -52,16 +52,22 @@ check_swiftlint_version ()
     then
       exit 1
     else
-      echo ""
-      echo ""
-      echo "Would you like to update swiftlint to version '$REQUIRED_SWIFTLINT_VERSION'? [N/y]"
-      read update_swiftlint
-      if [ "$update_swiftlint" == "y" ]
+      if [ ! -z "$FORCE_SWIFTLINT_VERSION" ]
       then
-        uninstall_swiftlint
+        uninstall_swiflint
         force_install_swiftlint
       else
-        exit 1
+        echo ""
+        echo ""
+        echo "Would you like to update swiftlint to version '$REQUIRED_SWIFTLINT_VERSION'? [N/y]"
+        read update_swiftlint
+        if [ "$update_swiftlint" == "y" ]
+        then
+          uninstall_swiftlint
+          force_install_swiftlint
+        else
+          exit 1
+        fi
       fi
     fi
   fi
