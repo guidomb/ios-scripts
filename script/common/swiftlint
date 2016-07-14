@@ -54,7 +54,7 @@ check_swiftlint_version ()
     else
       if [ ! -z "$FORCE_SWIFTLINT_VERSION" ]
       then
-        uninstall_swiflint
+        uninstall_swiftlint
         force_install_swiftlint
       else
         echo ""
