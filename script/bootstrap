@@ -153,6 +153,21 @@ install_swiftlint ()
   fi
 }
 
+install_tailor ()
+{
+  source script/common/tailor
+
+  if type tailor > /dev/null
+  then
+    echo ""
+    echo " → Checking installed version of tailor"
+    echo ""
+    check_tailor_version
+  else
+    force_install_tailor
+  fi
+}
+
 main ()
 {
   source script/.env
@@ -180,6 +195,11 @@ main ()
   if [ -f .swiftlint.yml ]
   then
     install_swiftlint
+  fi
+
+  if [ -f .tailor.yml ]
+  then
+    install_tailor
   fi
 
   if [ -f Podfile ]

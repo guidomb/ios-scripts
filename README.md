@@ -214,7 +214,8 @@ The build script just builds the project
 
 The test script builds and run the tests.
 
-  * If the project has a `.swiftlint.yml` file the the [Swift linter](https://github.com/realm/SwiftLint) is run.
+  * If the project has a `.swiftlint.yml` file the [Swift linter](https://github.com/realm/SwiftLint) is run.
+  * If the project has a `.tailor.yml` file [Tailor analyzer](https://github.com/sleekbyte/tailor) is run.
   * If the project uses [linterbot](https://github.com/guidomb/linterbot), the `script/test` is run on CI for a pull request and `swiftlint` is avaliable then the `linterbot` will be executed.
   * If the project has a `.podspec` file the Cocoapods podspec linter is run.
 
@@ -280,6 +281,7 @@ Common utility scripts or sets of functions that are useful but are not tied to 
 
   * `script/common/install_carthage`: Allows to install a specific version of Carthage.
   * `script/common/install_swiftlint`: Allows to install a specific version of SwiftLint.
+  * `script/common/install_tailor`: Allows to install a specific version of Tailor.
 
 ## License
 
