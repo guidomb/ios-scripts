@@ -1,0 +1,9 @@
+#!/bin/bash
+source script/common/tailor
+
+if [ -z $REQUIRED_TAILOR_VERSION ]
+then
+  echo "Enter the version of Tailor you want to install:"
+  read REQUIRED_TAILOR_VERSION
+fi
+force_install_tailor

@@ -1,0 +1,73 @@
+force_install_tailor ()
+{
+  echo ""
+  echo " → Installing tailor '$REQUIRED_TAILOR_VERSION'"
+  echo ""
+  wget https://github.com/sleekbyte/tailor/releases/download/v$REQUIRED_TAILOR_VERSION/tailor-$REQUIRED_TAILOR_VERSION.tar -O /tmp/tailor.tar > /dev/null
+  tar -xvf /tmp/tailor.tar
+  export PATH=$PATH:$PWD/tailor/bin/
+  echo "    ✔ swiftlint '$REQUIRED_TAILOR_VERSION' successfully installed"
+  echo ""
+}
+
+uninstall_tailor ()
+{
+  echo ""
+  echo " → Uninstalling tailor"
+  echo ""
+  local tailor_installed_version=`tailor version`
+  if type brew > /dev/null && [ ! -z "$(brew list --versions tailor)" ]
+  then
+    brew uninstall tailor > /dev/null
+  else
+    sudo rm /tmp/tailor
+  fi
+  echo "    ✔ tailor '$tailor_installed_version' successfully uninstalled"
+}
+
+check_tailor_version ()
+{
+  local tailor_installed_version=`tailor version`
+
+  local patch_number=`echo $REQUIRED_TAILOR_VERSION | cut -d "." -f 3`
+  if [ -z $patch_number ]
+  then
+    COMPARE_TAILOR_VERSION="$REQUIRED_TAILOR_VERSION.0"
+  else
+    COMPARE_TAILOR_VERSION="$REQUIRED_TAILOR_VERSION"
+  fi
+
+  local patch_number=`echo $tailor_installed_version | cut -d "." -f 3`
+  if [ -z $patch_number ]
+  then
+    COMPARE_TAILOR_VERSION="$tailor_installed_version.0"
+  fi
+
+  if [ "$tailor_installed_version" != "$COMPARE_TAILOR_VERSION" ]
+  then
+    printf "\033[1;31mError: tailor version '$tailor_installed_version' is not equal to '$COMPARE_TAILOR_VERSION'"
+    printf "\033[0m"
+    if [ ! -z "$NO_TAILOR_UPDATE" ]
+    then
+      exit 1
+    else
+      if [ ! -z "$FORCE_TAILOR_VERSION" ]
+      then
+        uninstall_tailor
+        force_install_tailor
+      else
+        echo ""
+        echo ""
+        echo "Would you like to update tailor to version '$REQUIRED_TAILOR_VERSION'? [N/y]"
+        read update_tailor
+        if [ "$update_tailor" == "y" ]
+        then
+          uninstall_tailor
+          force_install_tailor
+        else
+          exit 1
+        fi
+      fi
+    fi
+  fi
+}
