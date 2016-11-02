@@ -5,6 +5,7 @@ force_install_tailor ()
   echo ""
   wget https://github.com/sleekbyte/tailor/releases/download/v$REQUIRED_TAILOR_VERSION/tailor-$REQUIRED_TAILOR_VERSION.tar -O /tmp/tailor.tar > /dev/null
   tar -xvf /tmp/tailor.tar
+  mv tailor-$REQUIRED_TAILOR_VERSION/ tailor/
   export PATH=$PATH:$PWD/tailor/bin/
   echo "    ✔ tailor '$REQUIRED_TAILOR_VERSION' successfully installed"
   echo ""
