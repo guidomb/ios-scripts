@@ -79,10 +79,15 @@ then
   exit 1
 fi
 
-for scheme in $current_schemes
-do
-  run_tests $scheme
-done
+if [ -f fastlane/Scanfile ] || [ -f Scanfile ]
+then
+  bundle exec scan
+else
+  for scheme in $current_schemes
+  do
+    run_tests $scheme
+  done
+fi
 
 if [ -f "$PROJECT_NAME.podspec" ] && [ "$LINT_PODSPEC" == "yes" ]
 then
