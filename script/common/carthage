@@ -104,7 +104,7 @@ call_carthage()
     fi
 
     # Adds carthage cache install command if not disabled
-    if [ -z $DISABLE_CARTHAGE_CACHE_INSTALL ]
+    if [ -z $DISABLE_CARTHAGE_CACHE_INSTALL ] && [ $1 != "update" ]
     then
       carthage_cmd="($carthage_cache_cmd install || $carthage_cmd)"
     fi
