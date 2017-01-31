@@ -175,7 +175,11 @@ main ()
   echo " Bootstrapping $PROJECT_NAME"
   echo ""
 
-  script/common/check_xcode_version 
+  if [ -z "$DISABLE_XCODE_CHECK" ]
+  then
+    script/common/check_xcode_version $REQUIRED_XCODE_VERSION
+  fi
+
   install_git_hooks
 
   before_install_hooks

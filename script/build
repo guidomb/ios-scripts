@@ -46,7 +46,11 @@ build_using_xcodebuild ()
   eval $build_command
 }
 
-script/common/check_xcode_version
+if [ -z "$DISABLE_XCODE_CHECK" ]
+then
+  script/common/check_xcode_version $REQUIRED_XCODE_VERSION
+fi
+
 if [ ! -f $XCODE_WORKSPACE ] && [ -f Cartfile.resolved ] && type carthage > /dev/null
 then
   build_using_carthage
