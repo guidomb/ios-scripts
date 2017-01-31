@@ -2,16 +2,16 @@
 
 return if ENV['DISABLE_XCODE_CHECK']
 
+required_xcode_version = ENV['REQUIRED_XCODE_VERSION']
+if required_xcode_version.nil? || required_xcode_version.empty?
+  puts "Env variable REQUIRED_XCODE_VERSION is not defined."
+  exit 1
+end
+
 installed_xcode_version = `xcodebuild -version`
   .split("\n")
   .first
   .match(/Xcode ((\d+\.)?\d+\.\d+)/)[1]
-required_xcode_version = ENV['REQUIRED_XCODE_VERSION']
-
-if required_xcode_version.nil? || required_xcode_version.empty? 
-  puts "Env variable REQUIRED_XCODE_VERSION is not defined."
-  exit 1
-end
 
 # Drop patch number
 installed_xcode_version = installed_xcode_version[0..-3] if installed_xcode_version.scan(/\./).length == 2
