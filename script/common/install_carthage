@@ -6,4 +6,4 @@ then
   echo "Enter the version of Carthage you want to install:"
   read REQUIRED_CARTHAGE_VERSION
 fi
-force_install_carthage
+check_carthage_version
