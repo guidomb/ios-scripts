@@ -2,7 +2,6 @@
 
 set -e
 
-source script/common/check_xcode_version
 if [ -f script/script_hooks/bootstrap ] && [ -z $DISABLE_BOOTSTRAP_HOOKS ]
 then
   source script/script_hooks/bootstrap
@@ -176,7 +175,11 @@ main ()
   echo " Bootstrapping $PROJECT_NAME"
   echo ""
 
-  check_xcode_version
+  if [ -z "$DISABLE_XCODE_CHECK" ]
+  then
+    script/common/check_xcode_version $REQUIRED_XCODE_VERSION
+  fi
+
   install_git_hooks
 
   before_install_hooks

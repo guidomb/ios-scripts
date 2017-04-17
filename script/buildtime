@@ -5,7 +5,6 @@ set -e
 source script/.env
 source script/script_hooks/schemes
 source script/script_hooks/destinations
-source script/common/check_xcode_version
 
 run_build ()
 {

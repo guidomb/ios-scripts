@@ -1,13 +1,23 @@
-check_xcode_version ()
-{
-  if [ -z "$DISABLE_XCODE_CHECK" ]
-  then
-    installed_xcode_version=`xcodebuild -version | head -n 1 | ruby -e 'puts STDIN.read.match(/Xcode ((\d+\.)?\d+\.\d+)/)[1]'`
-    if [ "$installed_xcode_version" != "$REQUIRED_XCODE_VERSION" ]
-    then
-      printf "\033[1;31mError: xcodebuild version '$installed_xcode_version' is not equal to '$REQUIRED_XCODE_VERSION'"
-      printf "\033[0m"
-      exit 1
-    fi
-  fi
-}
+#!/usr/bin/env ruby
+
+required_xcode_version = ARGV.first
+if required_xcode_version.nil? || required_xcode_version.empty?
+  printf "\033[1;31mEnv variable REQUIRED_XCODE_VERSION is not defined."
+  printf "\033[0m\n"
+  exit 1
+end
+
+installed_xcode_version = `xcodebuild -version`
+  .split("\n")
+  .first
+  .match(/Xcode ((\d+\.)?\d+\.\d+)/)[1]
+
+# Drop patch number
+installed_xcode_version = installed_xcode_version[0..-3] if installed_xcode_version.scan(/\./).length == 2
+required_xcode_version = required_xcode_version[0..-3] if required_xcode_version.scan(/\./).length == 2
+
+if installed_xcode_version != required_xcode_version
+  printf "\033[1;31mError: xcodebuild version '#{installed_xcode_version}' is not equal to '#{required_xcode_version}'"
+  printf "\033[0m\n"
+  exit 1
+end
