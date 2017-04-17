@@ -1,4 +1,4 @@
-force_install_carthage ()
+check_carthage_version_exists ()
 {
   echo ""
   echo " → Checking carthage version '$REQUIRED_CARTHAGE_VERSION'"
@@ -8,19 +8,22 @@ force_install_carthage ()
   # on failure (page does not exist or is unreachable), $? will be 1
   if [ "$?" -eq 0 ]
   then
-    echo ""
-    echo " → Installing carthage '$REQUIRED_CARTHAGE_VERSION'"
-    echo ""
-    curl -s -L -O https://github.com/Carthage/Carthage/releases/download/$REQUIRED_CARTHAGE_VERSION/Carthage.pkg > /dev/null
-    sudo installer -pkg Carthage.pkg -target / > /dev/null
-    rm Carthage.pkg
-    echo "    ✔ carthage '$REQUIRED_CARTHAGE_VERSION' successfully installed"
-    echo ""
+    return 0
   else
-    printf "\033[1;31mError: carthage version '$REQUIRED_CARTHAGE_VERSION' does not exist."
-    printf "\033[0m"
-    echo ""
+    return 1
   fi
+}
+
+force_install_carthage ()
+{
+  echo ""
+  echo " → Installing carthage '$REQUIRED_CARTHAGE_VERSION'"
+  echo ""
+  curl -s -L -O https://github.com/Carthage/Carthage/releases/download/$REQUIRED_CARTHAGE_VERSION/Carthage.pkg > /dev/null
+  sudo installer -pkg Carthage.pkg -target / > /dev/null
+  rm Carthage.pkg
+  echo "    ✔ carthage '$REQUIRED_CARTHAGE_VERSION' successfully installed"
+  echo ""
 }
 
 uninstall_carthage ()
@@ -41,6 +44,14 @@ uninstall_carthage ()
 
 check_carthage_version ()
 {
+  if ! check_carthage_version_exists
+  then
+    printf "\033[1;31mError: carthage version '$REQUIRED_CARTHAGE_VERSION' does not exist."
+    printf "\033[0m"
+    echo ""
+    exit
+  fi
+
   local carthage_installed_version=`carthage version`
 
   local patch_number=`echo $REQUIRED_CARTHAGE_VERSION | cut -d "." -f 3`
