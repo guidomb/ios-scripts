@@ -1,3 +1,19 @@
+check_carthage_version_exists ()
+{
+  echo ""
+  echo " → Checking carthage version '$REQUIRED_CARTHAGE_VERSION'"
+  echo ""
+  curl -s --head https://github.com/Carthage/Carthage/releases/download/$REQUIRED_CARTHAGE_VERSION/Carthage.pkg | head -n 1 | grep "HTTP/1.[01] [23].." > /dev/null
+  # on success (page exists), $? will be 0;
+  # on failure (page does not exist or is unreachable), $? will be 1
+  if [ "$?" -eq 0 ]
+  then
+    return 0
+  else
+    return 1
+  fi
+}
+
 force_install_carthage ()
 {
   echo ""
@@ -28,6 +44,14 @@ uninstall_carthage ()
 
 check_carthage_version ()
 {
+  if ! check_carthage_version_exists
+  then
+    printf "\033[1;31mError: carthage version '$REQUIRED_CARTHAGE_VERSION' does not exist."
+    printf "\033[0m"
+    echo ""
+    exit
+  fi
+
   local carthage_installed_version=`carthage version`
 
   local patch_number=`echo $REQUIRED_CARTHAGE_VERSION | cut -d "." -f 3`
@@ -44,17 +68,14 @@ check_carthage_version ()
     carthage_installed_version="$carthage_installed_version.0"
   fi
 
-  if [ "$carthage_installed_version" != "$COMPARE_CARTHAGE_VERSION" ]
+  if [ "$carthage_installed_version" == ".0" ]
   then
-    printf "\033[1;31mError: carthage version '$carthage_installed_version' is not equal to '$COMPARE_CARTHAGE_VERSION'"
-    printf "\033[0m"
     if [ ! -z "$NO_CARTHAGE_UPDATE" ]
     then
       exit 1
     else
       if [ ! -z "$FORCE_CARTHAGE_VERSION" ]
       then
-        uninstall_carthage
         force_install_carthage
       else
         echo ""
@@ -63,10 +84,37 @@ check_carthage_version ()
         read update_carthage
         if [ "$update_carthage" == "y" ]
         then
-          uninstall_carthage
           force_install_carthage
         else
           exit 1
+        fi
+      fi
+    fi
+  else
+    if [ "$carthage_installed_version" != "$COMPARE_CARTHAGE_VERSION" ]
+    then
+      printf "\033[1;31mError: carthage version '$carthage_installed_version' is not equal to '$COMPARE_CARTHAGE_VERSION'"
+      printf "\033[0m"
+      if [ ! -z "$NO_CARTHAGE_UPDATE" ]
+      then
+        exit 1
+      else
+        if [ ! -z "$FORCE_CARTHAGE_VERSION" ]
+        then
+          uninstall_carthage
+          force_install_carthage
+        else
+          echo ""
+          echo ""
+          echo "Would you like to update carthage to version '$REQUIRED_CARTHAGE_VERSION'? [N/y]"
+          read update_carthage
+          if [ "$update_carthage" == "y" ]
+          then
+            uninstall_carthage
+            force_install_carthage
+          else
+            exit 1
+          fi
         fi
       fi
     fi
