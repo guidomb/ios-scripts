@@ -32,6 +32,7 @@ uninstall_carthage ()
   echo " → Uninstalling carthage"
   echo ""
   local carthage_installed_version=`carthage version`
+  carthage_installed_version=${carthage_installed_version##*$'\n'}
   if type brew > /dev/null && [ ! -z "$(brew list --versions carthage)" ]
   then
     brew uninstall carthage > /dev/null
