@@ -32,6 +32,7 @@ uninstall_carthage ()
   echo " → Uninstalling carthage"
   echo ""
   local carthage_installed_version=`carthage version`
+  carthage_installed_version=${carthage_installed_version##*$'\n'}
   if type brew > /dev/null && [ ! -z "$(brew list --versions carthage)" ]
   then
     brew uninstall carthage > /dev/null
@@ -53,6 +54,7 @@ check_carthage_version ()
   fi
 
   local carthage_installed_version=`carthage version`
+  carthage_installed_version=${carthage_installed_version##*$'\n'}
 
   local patch_number=`echo $REQUIRED_CARTHAGE_VERSION | cut -d "." -f 3`
   if [ -z $patch_number ]
@@ -117,6 +119,8 @@ check_carthage_version ()
           fi
         fi
       fi
+    else
+      echo "Carthage version '$REQUIRED_CARTHAGE_VERSION' is already installed."
     fi
   fi
 }
