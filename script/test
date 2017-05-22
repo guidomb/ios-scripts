@@ -34,6 +34,7 @@ run_tests ()
   test_command="open -b com.apple.iphonesimulator && $test_command"
   echo ""
   echo " → Running tests for scheme '$1'"
+  echo " $test_command"
   echo ""
   if [ ! -z "$VERBOSE" ]
   then
