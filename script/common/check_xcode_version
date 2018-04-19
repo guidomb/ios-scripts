@@ -16,7 +16,7 @@ installed_xcode_version = `xcodebuild -version`
 installed_xcode_version = installed_xcode_version[0..-3] if installed_xcode_version.scan(/\./).length == 2
 required_xcode_version = required_xcode_version[0..-3] if required_xcode_version.scan(/\./).length == 2
 
-if installed_xcode_version != required_xcode_version
+if installed_xcode_version < required_xcode_version
   printf "\033[1;31mError: xcodebuild version '#{installed_xcode_version}' is not equal to '#{required_xcode_version}'"
   printf "\033[0m\n"
   exit 1
