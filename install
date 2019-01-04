@@ -6,7 +6,7 @@ set -e
 
 DEFAULT_CARTHAGE_VERSION="0.16.2"
 DEFAULT_SWIFTLINT_VERSION="0.9.2"
-DEFAULT_XCODE_VERSION="7.3"
+DEFAULT_XCODE_VERSION="10.1"
 
 generate_env_file ()
 {
@@ -48,6 +48,10 @@ generate_env_file ()
     echo ""
     echo "What version of Xcode should we use? [$DEFAULT_XCODE_VERSION]"
     read required_xcode_version
+    if [ -z "$required_xcode_version" ]
+    then
+      required_xcode_version="$DEFAULT_XCODE_VERSION"
+    fi
 
     echo ""
     echo "Do you want to install githooks when bootstrapping the project? [Y/n]"
@@ -62,7 +66,15 @@ generate_env_file ()
       echo ""
       echo "What version of swiftlint should we use? [$DEFAULT_SWIFTLINT_VERSION]"
       read required_swiftlint_version
+      if [ -z "$required_swiftlint_version" ]
+      then
+        required_swiftlint_version="$DEFAULT_SWIFTLINT_VERSION"
+      fi
     fi
+
+    echo ""
+    echo "Do you want to install SwiftFormat? [N/y]"
+    read use_swiftformat
 
     if [ -f $1/Cartfile ] || [ -f $1/Cartfile.private ]
     then
@@ -128,7 +140,10 @@ XCODE_PROJECT=$xcode_project_file
 IOS_DESTINATION_VERSION=\${IOS_DESTINATION_VERSION:-\"$ios_destination_version\"}
 IOS_DESTINATION_SIMULATOR_NAME=\${IOS_DESTINATION_SIMULATOR_NAME:-\"$ios_destination_simulator_name\"}
 OSX_DESTINATION_ARCH=\${OSX_DESTINATION_ARCH:-\"$osx_destination_arch\"}" > "$1/script/.env"
-
+    if [ "$use_swiftformat" == "y" ]
+    then
+      echo "USE_SWIFTFORMAT=true" >> "$1/script/.env"
+    fi
     if [ "$use_ssh" == "y" ]
     then
       echo "USE_SSH=true" >> "$1/script/.env"

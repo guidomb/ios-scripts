@@ -152,6 +152,20 @@ install_swiftlint ()
   fi
 }
 
+install_swiftformat ()
+{
+  source script/common/swiftformat
+
+  if type swiftformat > /dev/null
+  then
+    echo ""
+    echo " ✔ SwiftFormat already installed!"
+    echo ""
+  else
+    force_install_swiftformat
+  fi
+}
+
 install_tailor ()
 {
   source script/common/tailor
@@ -198,6 +212,11 @@ main ()
   if [ -f .swiftlint.yml ]
   then
     install_swiftlint
+  fi
+  
+  if [ -n $USE_SWIFTFORMAT ]
+  then
+    install_swiftformat
   fi
 
   if [ -f .tailor.yml ]
