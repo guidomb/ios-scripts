@@ -3,7 +3,7 @@ force_install_swiftformat ()
 	echo ""
     echo " → Installing and configuring SwiftFormat..."
     echo ""
-	brew install swiftformat
+	brew update && brew install swiftformat
 
     echo ""
     echo " SwiftFormat successfully installed"
